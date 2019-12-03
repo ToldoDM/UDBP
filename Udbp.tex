@@ -1,10 +1,9 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage{fontspec} 
 \setmainfont{Arial}
 
 \begin{document}
-	\section{RICORDATI DI USARE ARIAL}
 	\section{Bozza}
 	si vuole realizzare una base di dati per l'organizzazione per una catena di cinema, chiamato per comodita' UIC Cinemas.
 	
@@ -19,6 +18,29 @@
 	Affinche' un cliente possa vedere un film di interesse, deve acquistare un biglietto presso le biglietterie 
 	
 	\section{Analisi dei requisiti}
+	
+	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena UCI cinema.
+	
+	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf cinema}:
+	\begin{itemize}
+		\item Nome cinema
+		\item Numero sale
+		\item Luogo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
+	\end{itemize}
+	Per poter identificare le {\br sale} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
+	\begin{itemize}
+		\item Numero sala (univoco all'interno del cinema)
+		\item Numero posti
+		\item Grandezza schermo (espresso in pollici)
+	\end{itemize}
+	Il cinema per emettere i biglietti non ha bisogno delle credenziali dell'utente, di conseguenza il bilgietto non e' nomintivo. Per emettere il biglietto, l'utente deve recarsi in biglietteria del cinema di interesse e il biglietto avra' queste caratteristiche:
+	\begin{itemize}		
+		\item film (film di interesse)
+		\item orario del film
+		\item cinema (dove viene proiettato il film)
+		\item sala
+		\item posto (scelto dall'utente al momento dell'acquisto)
+	\end{itemize}
 	
 		
 	
