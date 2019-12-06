@@ -1,5 +1,8 @@
 \documentclass[10pt]{article}
 
+\usepackage[margin=1in]{geometry}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
 \usepackage{fontspec} 
 \setmainfont{Arial}
 
@@ -15,33 +18,76 @@
 	\section{Abstract}
 	
 	La societa' UCI Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. 
-	Affinche' un cliente possa vedere un film di interesse, deve acquistare un biglietto presso le biglietterie 
+	continua...
 	
 	\section{Analisi dei requisiti}
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena UCI cinema.
-	
-	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf cinema}:
+			
+	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
 	\begin{itemize}
 		\item Nome cinema
 		\item Numero sale
 		\item Luogo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
 	\end{itemize}
-	Per poter identificare le {\br sale} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
+	Per poter identificare una {\bf Sala} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
 	\begin{itemize}
 		\item Numero sala (univoco all'interno del cinema)
 		\item Numero posti
+		\item Cinema di appartenenza
 		\item Grandezza schermo (espresso in pollici)
 	\end{itemize}
-	Il cinema per emettere i biglietti non ha bisogno delle credenziali dell'utente, di conseguenza il bilgietto non e' nomintivo. Per emettere il biglietto, l'utente deve recarsi in biglietteria del cinema di interesse e il biglietto avra' queste caratteristiche:
-	\begin{itemize}		
-		\item film (film di interesse)
-		\item orario del film
-		\item cinema (dove viene proiettato il film)
-		\item sala
-		\item posto (scelto dall'utente al momento dell'acquisto)
+	All'interno di ogni sala viene proiettato un {\bf Film}:
+	\begin{itemize}
+		\item Titolo
+		\item Durata
+		\item Trama
+		\item Genere
+		\item Anno
 	\end{itemize}
-	
-		
+	Per conoscere il cast del film, c'e' bisogno di conoscere il nome e il ruolo delle persone che ne hanno preso parte, e si possono suddividere in:
+	\begin{itemize}
+		\item {\bf Attore}: persona che ha recitato nel film 
+		\item {\bf Sceneggiatore}: persona che ha strutturato la sceneggiatura del film 
+		\item {\bf Produttore}: persona che ha finanziato il film 
+		\item {\bf Regista}: persona che ha diretto il film
+	\end{itemize}		 
+	Di conseguenza abbiamo bisogno di definire {\bf Persona}:
+	\begin{itemize}
+		\item Nome
+		\item Cognome
+		\item Data di nascita
+	\end{itemize}
+	Il cinema per emettere i biglietti non ha bisogno delle credenziali del cliente, di conseguenza il bilgietto non e' nomintivo. Il {\bf Biglietto} ha le seguenti caratteristiche:
+	\begin{itemize}		
+		\item Film (film di interesse)
+		\item Orario inizio film
+		\item Data proiezione
+		\item Cinema (dove viene proiettato il film)
+		\item Sala
+		\item Posto (scelto dall'utente al momento dell'acquisto)
+	\end{itemize}
+ 	Per massimizzare l'utilizzo delle sale viene creata una \textbf{Programmazione} in cui vengono specificati gli orari di inizio dei vari film per i vari giorni, quindi sono necessarie le seguenti informazioni:
+ 	\begin{itemize}
+ 		\item Cinema
+ 		\item Sala
+ 		\item Film
+ 		\item Ora inizio
+ 	\end{itemize} 
+ 	\begin{tabular}{ |p{3.2cm}|p{5cm}|p{2.5cm}|p{3cm}|  }
+ 		\hline
+ 		\multicolumn{4}{|c|}{\textbf{Glossario dei termini}} \\
+ 		\hline
+ 		\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\
+ 		\hline
+ 			Cliente                                & Utente che usufruisce del servizio del cinema                          &                                                                                      & Bilgietto                                                                   \\ \hline
+ 		Programmazione                         & Pianificazione orario inizio film all'interno del cinema                &                                                                                      & Biglietto, Film                                                             \\ \hline
+ 		Sala                                   & Stanza dove viene proiettato il Film                                    &                               Persona                                                       & Biglietto, Cinema, Programmazione \\ \hline
+ 		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Cliente, Film                                                               \\ \hline
+ 		Persona                                & Persona che ha preso parte alla realizzazione del Film                  & Attore, Sceneggiatore, Produttore, Regista & Film                                                                        \\ \hline
+ 		Film                                   & Film presenti al cinema                                                 &                                                                                      & Programmazione, Biglietto        \\ \hline
+ 	\end{tabular}
+ 
+ 	
 	
 \end{document}
