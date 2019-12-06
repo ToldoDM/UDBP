@@ -1,16 +1,16 @@
 # UDBP
-UDBP is an University DataBase Project.
+UDBP e' University DataBase Project.
 
-This project cover up every point for the costruction of a proper database from the analysis to the implementetion into a MariaDB in a Linux OS. Is made by me and my project partner [Alessandro](https://github.com/AlessandroCanel), for the course of [Database](https://didattica.unipd.it/off/2018/LT/SC/SC1167/000ZZ/SCP4065533/N0) from the univerity of padua.
+Questo progetto copre ogni punto per la costruzione di un corretto database, a partire dall'analisi fino all'implementazione in un MariaDB in un SO Linux. Questo progetto e' svolto da [me](https://github.com/ToldoDM) e dal mio partner di progetto [Alessandro](https://github.com/AlessandroCanel), per il corso di studi di [Database](https://didattica.unipd.it/off/2018/LT/SC/SC1167/000ZZ/SCP4065533/N0) dell'universita' di Padova.
 
-The project report contains:
-  - Requirements Analysis
-    - Textual description of typical request and operation
-  - Conceptual Design
-    - Description of entity and relationship
-    - ERD 
-  - Logical Design
-    - Revision of the ERD
-    - Relational schema
-  - Implementation of the logical scheme
-  - Query, functions and indexes
+La relazione del progetto contiene:
+  - Analizi dei requisiti
+    - Descrizione testuale delle richieste ed operazioni
+  - Design concettuale
+    - Decrizione di entita' e relazioni
+    - Schema ER
+  - Design Logico
+    - Revisione dello schema ER
+    - Schema relazionale
+  - Implementazione dello schema logico
+  - Query, funzioni ed indici
