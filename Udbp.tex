@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
+\usepackage[table]{xcolor}
 \usepackage{fontspec} 
 \setmainfont{Arial}
 
@@ -52,11 +53,12 @@
 		\item {\bf Produttore}: persona che ha finanziato il film 
 		\item {\bf Regista}: persona che ha diretto il film
 	\end{itemize}		 
-	Di conseguenza abbiamo bisogno di definire {\bf Persona}:
+	Di conseguenza abbiamo bisogno di definire {\bf Lavoratore}:
 	\begin{itemize}
 		\item Nome
 		\item Cognome
 		\item Data di nascita
+		\item Film (a cui ha partecipato)
 	\end{itemize}
 	Il cinema per emettere i biglietti non ha bisogno delle credenziali del cliente, di conseguenza il bilgietto non e' nomintivo. Il {\bf Biglietto} ha le seguenti caratteristiche:
 	\begin{itemize}		
@@ -73,21 +75,104 @@
  		\item Sala
  		\item Film
  		\item Ora inizio
+ 		\item Data film
  	\end{itemize} 
- 	\begin{tabular}{ |p{3.2cm}|p{5cm}|p{2.5cm}|p{3cm}|  }
+ 	\subsection{Glossario dei termini}
+ 	\begin{tabular}{ |p{3cm}|p{4.5cm}|p{2.5cm}|p{3cm}|  }
+ 		%\hline
+ 		%\multicolumn{4}{|c|}{\textbf{Glossario dei termini}} \\
  		\hline
- 		\multicolumn{4}{|c|}{\textbf{Glossario dei termini}} \\
- 		\hline
+ 		\rowcolor{lightgray}
  		\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\
  		\hline
- 			Cliente                                & Utente che usufruisce del servizio del cinema                          &                                                                                      & Bilgietto                                                                   \\ \hline
  		Programmazione                         & Pianificazione orario inizio film all'interno del cinema                &                                                                                      & Biglietto, Film                                                             \\ \hline
- 		Sala                                   & Stanza dove viene proiettato il Film                                    &                               Persona                                                       & Biglietto, Cinema, Programmazione \\ \hline
+ 		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Biglietto, Cinema, Programmazione \\ \hline
  		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Cliente, Film                                                               \\ \hline
- 		Persona                                & Persona che ha preso parte alla realizzazione del Film                  & Attore, Sceneggiatore, Produttore, Regista & Film                                                                        \\ \hline
+ 		Lavoratore                                & Persona singola che ha preso parte alla realizzazione del Film                  & Attore, Sceneggiatore, Produttore, Regista & Film                                                                        \\ \hline
  		Film                                   & Film presenti al cinema                                                 &                                                                                      & Programmazione, Biglietto        \\ \hline
+ 		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      & Programmazione, Biglietto, Sala        \\ \hline
  	\end{tabular}
- 
- 	
+ 	\subsection{Strutturazione dei requisiti}
+	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Cinema"} \\
+ 		\hline
+ 		I Cinema vengono identificati tramite: Nome cinema, Numero sale, Luogo (composto da via, citta', provincia, codice postale, regione, nazione) \\
+ 		\hline 		
+ 	\end{tabular}
+ 	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+	 	\hline
+	 	\rowcolor{lightgray}
+	 	\textbf{Frasi relative a "Sala"} \\
+	 	\hline
+	 	Le Sale vengono identificate tramite: Numero sale (univoco all'interno del cinema), Numero posti, Cinema di appartenenza, Grandezza schermo (espresso in pollici) \\
+	 	\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Film"} \\
+		\hline
+		I Film vengono identificati tramite: Titolo, Durata, Trama, Genere, Anno \\
+		\hline 		
+	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Lavoratore"} \\
+ 		\hline
+ 		I Lavoratori vengono identificati tramite: Nome, Cognome, Data di nascita, Film (a cui ha lavorato) \\
+ 		\hline 		
+ 	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Attore"} \\
+ 		\hline
+ 		Persona che ha lavorato come attore nel film \\
+ 		\hline 		
+ 	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Sceneggiatore"} \\
+		\hline
+		Persona che ha lavorato come sceneggiatore nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Produttore"} \\
+		\hline
+		Persona che ha lavorato come produttore nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Regista"} \\
+		\hline
+		Persona che ha lavorato come regista nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Biglietto"} \\
+		\hline
+		I Biglietti vengono idetificati tramite: Film, Orario, Data proiezione, Cinema, Sala, Posto \\
+		\hline 		
+	\end{tabular} 
+	
 	
 \end{document}
