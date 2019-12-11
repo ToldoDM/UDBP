@@ -14,3 +14,4 @@ La relazione del progetto contiene:
     - Schema relazionale
   - Implementazione dello schema logico
   - Query, funzioni ed indici
+
