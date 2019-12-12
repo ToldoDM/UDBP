@@ -68,7 +68,6 @@
 	\end{itemize}
 	Il cinema per emettere i biglietti non ha bisogno delle credenziali del cliente, di conseguenza il bilgietto non e' nomintivo. Il {\bf Biglietto} ha le seguenti caratteristiche:
 	\begin{itemize}	
-		\item Id	
 		\item Film (film di interesse)
 		\item Data e ora proiezione
 		\item Cinema (dove viene proiettato il film)
@@ -93,7 +92,7 @@
  		Programmazione                         & Pianificazione orario inizio film all'interno del cinema                &                                                                                      & Film, Sala, biglietto                                                             \\ \hline
  		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Programmazione, Cinema \\ \hline
  		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Programmazione \\ \hline
- 		Lavoratore                                & Persona singola che ha preso parte alla realizzazione di almeno un Film                  & Attore, Sceneggiatore, Produttore, Regista & Film, Cast                                                                        \\ \hline
+ 		Lavoratore                                & Persona singola che ha preso parte alla realizzazione di almeno un Film                  & Attore, Sceneggiatore, Produttore, Regista & Cast                                                                        \\ \hline
  		Film                                   & Film presenti al cinema                                                 &                                                                                      & Programmazione, Biglietto, Cast        \\ \hline
  		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      & Sala        \\ \hline
  		Cast                                   &    Cast del film &                                                                                      & Film, Lavoratore        \\ \hline
@@ -185,7 +184,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite: Id, Film, Data e ora proiezione, Cinema, Sala, Posto \\
+		I Biglietti vengono idetificati tramite: Film, Data e ora proiezione, Cinema, Sala, Posto \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
