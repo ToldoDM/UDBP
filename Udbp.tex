@@ -64,13 +64,13 @@
 		\item Nome
 		\item Cognome
 		\item Data di nascita
+		\item Indirizzo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
 	\end{itemize}
 	Il cinema per emettere i biglietti non ha bisogno delle credenziali del cliente, di conseguenza il bilgietto non e' nomintivo. Il {\bf Biglietto} ha le seguenti caratteristiche:
 	\begin{itemize}	
 		\item Id	
 		\item Film (film di interesse)
-		\item Orario inizio film
-		\item Data proiezione
+		\item Data e ora proiezione
 		\item Cinema (dove viene proiettato il film)
 		\item Sala
 		\item Posto (scelto dall'utente al momento dell'acquisto)
@@ -80,8 +80,7 @@
  		\item Cinema
  		\item Sala
  		\item Film
- 		\item Ora inizio
- 		\item Data film
+ 		\item Data e ora proiezione
  	\end{itemize} 
  	\subsection{Glossario dei termini}
  	\begin{tabular}{ |p{3cm}|p{4.5cm}|p{2.5cm}|p{3cm}|  }
@@ -141,7 +140,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Lavoratore"} \\
  		\hline
- 		I Lavoratori vengono identificati tramite: Id, Nome, Cognome, Data di nascita \\
+ 		I Lavoratori vengono identificati tramite: Id, Nome, Cognome, Data di nascita, indirizzo (composto da via, citta', provincia, codice postale, regione, nazione) \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -186,7 +185,16 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite: Id, Film, Orario, Data proiezione, Cinema, Sala, Posto \\
+		I Biglietti vengono idetificati tramite: Id, Film, Data e ora proiezione, Cinema, Sala, Posto \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Programmazione"} \\
+		\hline
+		La Programmazione viene idetificata tramite: Cinema, Sala, Film, Data e ora proiezione \\
 		\hline 		
 	\end{tabular} 
 	
@@ -199,7 +207,7 @@
 		\begin{itemize}
 			\item \underline{Nome: \textit{string} univoco}
 			\item Numero sale: \textit{int}
-			\item Luogo: attributo composto
+			\item Indirizzo: attributo composto
 				\subitem Via: \textit{string}
 				\subitem Citta': \textit{string}
 				\subitem Provincia: \textit{string}
@@ -227,7 +235,14 @@
 			\item \underline{Id: \textit{int} univoco}
 			\item Nome: \textit{string}
 			\item Cognome: \textit{string}
-			\item Data\_di\_nascita: \textit{datetime}
+			\item Data\_di\_nascita: \textit{datetime}			
+			\item Indirizzo: attributo composto, possibile \textit{null}
+				\subitem Via: \textit{string}
+				\subitem Citta': \textit{string}
+				\subitem Provincia: \textit{string}
+				\subitem CAP: \textit{int}
+				\subitem Regione: \textit{string}
+				\subitem Nazione: \textit{string}
 		\end{itemize}
 	\end{itemize}
 	
