@@ -87,7 +87,7 @@
 	\textbf{Operazione 3}: Aggiunta nuovi film (5 volte al mese)\\
 	\textbf{Operazione 4}: Rilascio di una recensione (2200 volte al giorno)\\
 	\textbf{Operazione 5}: Aggiunta di un nuovo cast (4 volte al mese)\\
-	\textbf{Operazione 6}: Conteggio totale posti venduti per ogni spettacolo (1 volta al giorno)
+	\textbf{Operazione 6}: Conteggio totale posti venduti per ogni spettacolo (1 volta a settimana)
  	\subsection{Glossario dei termini}
  	\begin{tabular}{ |p{3cm}|p{4.5cm}|p{2.5cm}|p{3cm}|  }
  		%\hline
@@ -251,10 +251,23 @@
 				\subitem Nazione: \textit{string}
 		\end{itemize}
 	\end{itemize}
-	operazione 1: programmazione di uno spettacolo in una sala (40 volte al giorno)
-	operazione 2: Emissione biglietti (2500 volte al giorno)
-	operazione 3: arrivi di nuovi film (5 volte al mese)
-	operazione 4: rilascio di una recensione (2200 volte al giorno)
-	operazione 5: aggiunta di un nuovo cast (4 volte al mese)
+	\section{Progettazione logica}
+	\subsection{Analisi ridondanza}	
+	Una ridondanza si trova nell'entita' \textbf{Spettacolo}. nella quale l'attributo \textbf{posti\_venduti} si puo' calcolare visitando la relazione \textbf{Spettacolo-Biglietto} (chiamata "fa riferimento") e contando le occorrenze di tale relazione.
 	
+	\begin{itemize}
+		\item \textbf{Operazione 2}: Emissione biglietti (2500 volte al giorno)
+		\item \textbf{Operazione 6}: Conteggio totale posti venduti per ogni spettacolo (1 volta a settimana)		
+	\end{itemize}
+	\subsubsection{Presenza di ridondanza}
+	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo
+	
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{|l|r|r|r|r|r|r|}
+			% body of tabular environment 
+		\end{tabular}
+		\caption{This is my one big table} \label{tab:sometab}
+	\end{table}
+
 \end{document}
