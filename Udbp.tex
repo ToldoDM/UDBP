@@ -253,21 +253,88 @@
 	\end{itemize}
 	\section{Progettazione logica}
 	\subsection{Analisi ridondanza}	
-	Una ridondanza si trova nell'entita' \textbf{Spettacolo}. nella quale l'attributo \textbf{posti\_venduti} si puo' calcolare visitando la relazione \textbf{Spettacolo-Biglietto} (chiamata "fa riferimento") e contando le occorrenze di tale relazione.
-	
+	Una ridondanza si trova nell'entita' \textbf{Spettacolo}, nella quale l'attributo \textbf{posti\_venduti} si puo' calcolare visitando la relazione \textbf{Spettacolo-Biglietto} (chiamata "fa riferimento") e contando le occorrenze di tale relazione.
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Concetto} & \textbf{Tipo} & \textbf{Volume} \\
+			\hline
+			Spettacolo & E & 100 \\
+			\hline
+			Biglietto & E & 18000 \\
+			\hline
+			Fa' Riferimento & R & 18000 \\
+			\hline
+		\end{tabular}
+	\end{table}
 	\begin{itemize}
 		\item \textbf{Operazione 2}: Emissione biglietti (2500 volte al giorno)
 		\item \textbf{Operazione 6}: Conteggio totale posti venduti per ogni spettacolo (1 volta a settimana)		
 	\end{itemize}
+	L'operazione 6 ha come scopo contare l'affluenza settimanale dei clienti.
 	\subsubsection{Presenza di ridondanza}
-	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo
+	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo (accessi in scrittura vengono considerati come operazioni piu onerose, quindi vengono contate due volte).\\\\
 	
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+		\hline
+		Biglietto & E & 1 & S \\
+		\hline
+		Fa' riferimento & R & 1 & S \\
+		\hline
+		Spettacolo & E & 1 & L \\
+		\hline
+		Spettacolo & E & 1 & S \\
+		\hline
+	\end{tabular}
+	\begin{itemize}
+		\item Costi 3*2500 + 1*2500 = 17500 accessi 
+	\end{itemize}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+		\hline
+		Spettacolo & E & 1 & L \\
+		\hline
+	\end{tabular}
+	\begin{itemize}
+	\item Costi 1*100 = 100 accessi 
+	\end{itemize}
+	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 17500*7 + 100 = 122600 accessi.
+	\subsubsection{Assenza di ridondanza}
+	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.
 	\begin{table}[!h]
 		\centering
-		\begin{tabular}{|l|r|r|r|r|r|r|}
-			% body of tabular environment 
+		\caption{\textbf{Operazione 2}} \label{tab:sometab}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+			\hline
+			Biglietto & E & 1 & S \\
+			\hline
+			Fa' riferimento & R & 1 & S \\
+			\hline
+			Spettacolo & E & 1 & L \\
+			\hline
+			Spettacolo & E & 1 & S \\
+			\hline
 		\end{tabular}
-		\caption{This is my one big table} \label{tab:sometab}
+		\begin{itemize}
+			\item Costi 3*2500 + 1*2500 = 17500 accessi 
+		\end{itemize}
+		\caption{\textbf{Operazione 6}} \label{tab:sometab}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+			\hline
+			Spettacolo & E & 1 & L \\
+			\hline
+		\end{tabular}
+		\begin{itemize}
+			\item Costi 1*100 = 100 accessi 
+		\end{itemize}
 	\end{table}
-
 \end{document}
