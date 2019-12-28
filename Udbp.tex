@@ -260,11 +260,11 @@
 			\hline
 			\textbf{Concetto} & \textbf{Tipo} & \textbf{Volume} \\
 			\hline
-			Spettacolo & E & 100 \\
+			Spettacolo & E & 200 \\
 			\hline
-			Biglietto & E & 18000 \\
+			Biglietto & E & 28000 \\
 			\hline
-			Fa' Riferimento & R & 18000 \\
+			Fa' Riferimento & R & 28000 \\
 			\hline
 		\end{tabular}
 	\end{table}
@@ -272,41 +272,12 @@
 		\item \textbf{Operazione 2}: Emissione biglietti (2500 volte al giorno)
 		\item \textbf{Operazione 6}: Conteggio totale posti venduti per ogni spettacolo (1 volta a settimana)		
 	\end{itemize}
-	L'operazione 6 ha come scopo contare l'affluenza settimanale dei clienti.
+	L'operazione 6 ha come scopo contare l'affluenza settimanale dei clienti.\\
+	Di seguito le operazioni di conteggio in scrittura verranno considerate doppie perche' operazioni piu onerose rispetto alle operazioni di lettura.
 	\subsubsection{Presenza di ridondanza}
-	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo (accessi in scrittura vengono considerati come operazioni piu onerose, quindi vengono contate due volte).\\\\
+	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo.
 	
-	\centering
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
-		\hline
-		Biglietto & E & 1 & S \\
-		\hline
-		Fa' riferimento & R & 1 & S \\
-		\hline
-		Spettacolo & E & 1 & L \\
-		\hline
-		Spettacolo & E & 1 & S \\
-		\hline
-	\end{tabular}
-	\begin{itemize}
-		\item Costi 3*2500 + 1*2500 = 17500 accessi 
-	\end{itemize}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
-		\hline
-		Spettacolo & E & 1 & L \\
-		\hline
-	\end{tabular}
-	\begin{itemize}
-	\item Costi 1*100 = 100 accessi 
-	\end{itemize}
-	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 17500*7 + 100 = 122600 accessi.
-	\subsubsection{Assenza di ridondanza}
-	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.
-	\begin{table}[!h]
+	\begin{table}[h!]
 		\centering
 		\caption{\textbf{Operazione 2}} \label{tab:sometab}
 		\begin{tabular}{|c|c|c|c|}
@@ -334,7 +305,42 @@
 			\hline
 		\end{tabular}
 		\begin{itemize}
-			\item Costi 1*100 = 100 accessi 
+		\item Costi 1*200 = 200 accessi 
 		\end{itemize}
 	\end{table}
+	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 17500*7 + 200 = 122700 accessi.
+	\subsubsection{Assenza di ridondanza}
+	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.
+	
+	\begin{table}[!h]
+		\centering
+		\caption{\textbf{Operazione 2}} \label{tab:sometab}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+			\hline
+			Biglietto & E & 1 & S \\
+			\hline
+			Fa' riferimento & R & 1 & S \\
+			\hline
+		\end{tabular}
+		\begin{itemize}
+			\item Costi 2*2500 = 10000 accessi 
+		\end{itemize}
+		\caption{\textbf{Operazione 6}} \label{tab:sometab}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
+			\hline
+			Spettacolo & E & 1 & L \\
+			\hline
+			Fa' riferimento & R &140&L\\
+			\hline
+		\end{tabular}
+		\begin{itemize}
+			\item Costi 1*200 + 140*200 = 28200 accessi
+		\end{itemize}
+	\end{table}
+	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 10000*7 + 28200 = 108200 accessi.\\\\
+	In coclusione la ridondanza del dato non porta vantaggi, di conseguenza si e' deciso di eliminarla.
 \end{document}
