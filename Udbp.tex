@@ -343,4 +343,15 @@
 	\end{table}
 	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 10000*7 + 28200 = 108200 accessi.\\\\
 	In coclusione la ridondanza del dato non porta vantaggi, di conseguenza si e' deciso di eliminarla.
+	\subsection{Ristrutturazione schema ER}
+	\subsubsection{Eliminazione generalizzioni}
+	\paragraph{Persona}
+	La generalizzaione \textit{Persona}, che rappresenta una persona che e' un cliente del cinema, ha come figlia l'entita' \textit{Lavoratore}, che in questo caso viene considerato come il lavoratore che prende parte alla realizzazione di un film.\\
+	Essendo una generalizzazione parziale, si e' deciso di dividere le due entita' e creare una associazione uno a uno tra le due. Questo perche' ci sono occorrenze che riferiscono singolarmente con l'entita' figlia Lavoratore.\\
+	\paragraph{Lavoratore}
+	A sua volta la generalizzazione di \textit{Lavoratore} ha quattro entita' figlie: \textit{Attore}, \textit{Sceneggiatore}, \textit{Produttore} e \textit{Regista}.\\
+	Essendo in questo caso una generalizzazione completa, e non essendoci associazioni dirette con le entita' figlie, si e' deciso di accorpare le entita' figlie all'interno dell'entita' \textit{Lavoratore}, aggiungendone un nuovo attributo \textit{Ruolo}, il quale ha lo scopo di identificare i vari ruoli svolti dal lavoratore.
+	\subsubsection{Introduzione entita' indirizzo}
+	Per rappresentare le informazioni sull’indirizzo riguardanti la posizione di un \textit{Cinema}, è stata introdotta l’entità \textit{Indirizzo}. Questa entità contiene i seguenti attributi: cap, via, provincia, regione, nazione e città. \textit{Cinema} sara' l'unica entita' collegata ad \textit{Indirizzo}.
+	
 \end{document}
