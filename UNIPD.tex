@@ -1,0 +1,180 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+\usepackage[table]{xcolor}
+%\usepackage{fontspec} 
+%\setmainfont{Arial}
+
+\begin{document}
+	\section{Bozza}
+	si vuole realizzare una base di dati per l'organizzazione per una catena di cinema, chiamato per comodita' UIC Cinemas.
+	
+	La UCI Cinemas ha in possesso molteplici cinema situati in diverse citta'. Ogni cinema e' un multisala composto dalle 5 alle 10 sale ciascuna con posti che variano da 50 a 250 posti numerati. Ogni film proiettato varia  in lunghezza, genere, e cast (composto  da attori, sceneggiatori e produttori).
+	La programmazione della proiezione dei film puo' variare di giorno in giorno (varia in base ai giorni della settimana, per esempio Martedi' vengono proiettati meno film rispetto al weekend) e comprende la proiezione un film in un cinema in una sala ad un ora specifica e nella durata totale della proiezone sono compresi dai 15 ai 30 min di pubblicita' (nelle programmazioni piu corpose vengono proiettati piu' film, di conseguenza viene ridotto la durata della pubblicita').
+	Il consumatore per vedere un film deve acquistare un biglietto, tramite portale on-line o in biglietteria. Tale biglietto contiene all'interno informazioni inerenti a: cinema dove e la sala dove avviene la proiezione, il film di interesse, l'ora e il giorno di inizio film e il numero del posto [(il posto viene assegnato automaticamente al momento dell'acquisto)].
+	
+	
+	\section{Abstract}
+	
+	La societa' UCI Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. 
+	continua...
+	
+	\section{Analisi dei requisiti}
+	
+	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena UCI cinema.
+			
+	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
+	\begin{itemize}
+		\item Nome cinema
+		\item Numero sale
+		\item Luogo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
+	\end{itemize}
+	Per poter identificare una {\bf Sala} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
+	\begin{itemize}
+		\item Numero sala (univoco all'interno del cinema)
+		\item Numero posti
+		\item Cinema di appartenenza
+		\item Grandezza schermo (espresso in pollici)
+	\end{itemize}
+	Per ogni {\bf Sala} vine assegnato un entità {\bf Spetttacolo} contenente, in quanto necessaria per l'organizzazioni degli orari di proiezione:
+	\begin{itemize}
+	    \item data/orario
+	\end{itemize}
+	L'entità spettacolo necessita di essere assegnata a {\bf Film} dato che ogni necessita di un tempo diverso da film a film:
+	\begin{itemize}
+		\item Titolo
+		\item Durata
+		\item Trama
+		\item Genere
+		\item Anno
+	\end{itemize}
+	Ciascun film è prodotto da un cast {\bf Cast}, di cui si conosce:
+	\begin{itemize}
+		\item Nome
+	\end{itemize}
+	Per conoscere il cast del film, E necesssario avere nome e ruolo delle persone che ne hanno fatto parte, dette persone fanno parte dell'entità {\bf Lavoratore}, che a sua volta è una specalizzazione dei suddetti organi di produzione cinematografica:
+	\begin{itemize}
+		\item {\bf Attore}: persona che ha recitato nel film 
+		\item {\bf Sceneggiatore}: persona che ha strutturato la sceneggiatura del film 
+		\item {\bf Produttore}: persona che ha finanziato il film 
+		\item {\bf Regista}: persona che ha diretto il film
+	\end{itemize}		 
+	Di conseguenza è necessario definire {\bf Persona}, in quanto ogni {\bf Lavoratore} è per l'appunto, una persona e quindi tale entità dovra comprendere:
+	\begin{itemize}
+		\item id
+		\item nome
+		\item Cognome
+		\item Data di nascita
+	\end{itemize}
+	Ogni persona in quanto tale, potrà acquistare un biglietto per un qualsivoglia film. Il {\bf Biglietto} conterrà:
+	\begin{itemize}
+		\item n.posto
+	\end{itemize}
+	Quest'ultimo farà riferimento allo spettacolo; discusso in precedenza.
+	Qualsiasi persona potrà inoltre rilasciare una {\bf recensione} inerente al film. L'entità recensione conterrà:
+	\begin{itemize}
+		\item id cliente
+		\item commento
+		\item voto
+	\end{itemize}
+ 	\subsection{Glossario dei termini}
+ 	\begin{tabular}{ |p{3cm}|p{4.5cm}|p{2.5cm}|p{3cm}|  }
+ 		%\hline
+ 		%\multicolumn{4}{|c|}{\textbf{Glossario dei termini}} \\
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\
+ 		\hline
+ 		Programmazione                         & Pianificazione orario inizio film all'interno del cinema                &                                                                                      & Biglietto, Film                                                             \\ \hline
+ 		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Biglietto, Cinema, Programmazione \\ \hline
+ 		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Cliente, Film                                                               \\ \hline
+ 		Lavoratore                                & Persona singola che ha preso parte alla realizzazione del Film                  & Attore, Sceneggiatore, Produttore, Regista & Film                                                                        \\ \hline
+ 		Film                                   & Film presenti al cinema                                                 &                                                                                      & Programmazione, Biglietto        \\ \hline
+ 		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      & Programmazione, Biglietto, Sala        \\ \hline
+ 	\end{tabular}
+ 	\subsection{Strutturazione dei requisiti}
+	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Cinema"} \\
+ 		\hline
+ 		I Cinema vengono identificati tramite: Nome cinema, Numero sale, Luogo (composto da via, citta', provincia, codice postale, regione, nazione) \\
+ 		\hline 		
+ 	\end{tabular}
+ 	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+	 	\hline
+	 	\rowcolor{lightgray}
+	 	\textbf{Frasi relative a "Sala"} \\
+	 	\hline
+	 	Le Sale vengono identificate tramite: Numero sale (univoco all'interno del cinema), Numero posti, Cinema di appartenenza, Grandezza schermo (espresso in pollici) \\
+	 	\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Film"} \\
+		\hline
+		I Film vengono identificati tramite: Titolo, Durata, Trama, Genere, Anno \\
+		\hline 		
+	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Lavoratore"} \\
+ 		\hline
+ 		I Lavoratori vengono identificati tramite: Nome, Cognome, Data di nascita, Film (a cui ha lavorato) \\
+ 		\hline 		
+ 	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Attore"} \\
+ 		\hline
+ 		Persona che ha lavorato come attore nel film \\
+ 		\hline 		
+ 	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Sceneggiatore"} \\
+		\hline
+		Persona che ha lavorato come sceneggiatore nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Produttore"} \\
+		\hline
+		Persona che ha lavorato come produttore nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Regista"} \\
+		\hline
+		Persona che ha lavorato come regista nel film \\
+		\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Biglietto"} \\
+		\hline
+		I Biglietti vengono idetificati tramite: Film, Orario, Data proiezione, Cinema, Sala, Posto \\
+		\hline 		
+	\end{tabular} 
+	
+	
+\end{document}
