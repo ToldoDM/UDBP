@@ -5,7 +5,9 @@
 \renewcommand{\arraystretch}{1.5}
 \usepackage[table]{xcolor}
 \usepackage{fontspec} 
+\usepackage{graphicx}
 \setmainfont{Arial}
+\graphicspath{ {./Schemas/} }
 
 \begin{document}
 	\section{Bozza}
@@ -276,7 +278,6 @@
 	Di seguito le operazioni di conteggio in scrittura verranno considerate doppie perche' operazioni piu onerose rispetto alle operazioni di lettura.
 	\subsubsection{Presenza di ridondanza}
 	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo.
-	
 	\begin{table}[h!]
 		\centering
 		\caption{\textbf{Operazione 2}} \label{tab:sometab}
@@ -310,9 +311,8 @@
 	\end{table}
 	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 17500*7 + 200 = 122700 accessi.
 	\subsubsection{Assenza di ridondanza}
-	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.
-	
-	\begin{table}[!h]
+	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.	
+	\begin{table}[h!]
 		\centering
 		\caption{\textbf{Operazione 2}} \label{tab:sometab}
 		\begin{tabular}{|c|c|c|c|}
@@ -365,13 +365,35 @@
 	\paragraph{Film}
 	Per identificare un singolo film, bisognerebbe comprendere \textit{Titolo, Anno, Genere e Durata}, dato che potrebbe verificarsi l'uscita di un film omonimo nello stesso anno con lo stesso genere. Quindi per semplificare e rendere ancora piu' forte l'identificazione, viene introdotto l'attributo identificatore \textit{Id}.
 	\paragraph{Recensione}
-	Per identificare la singola recensione si ricorre all'utilizzo di un identificatore \textit{Id}, questo per la stessa motivazione presente in \textit{Spettacolo}.
+	Per identificare la singola recensione si utilizza \textit{Persona e Film}, dato che la coppia ne identifica una occorrenza
 	\paragraph{Persona}
 	Per identificare una persona, \textit{Nome, Cognome e Data\_nascita} possono risultare inadeguati per identificare una singola occorrenza, quindi viene introdotto l'attributo identificatore \textit{Id}.
 	\paragraph{Lavoratore}
 	Per identificare un lavoratore, viene utilizzato il suo \textit{Ruolo} e il riferimento a persona \textit{Id\_persona}, questo perche' un lavoratore puo' assumere piu' ruoli all'interno di un cast.
 	\paragraph{Cast}
 	Per identificare un cast si ricorre all'utilizzo di un identificatore \textit{Id}, questo perche' potrebbero esserci cast omonimi.
+	\paragraph{Partecipazione}
+	Per identificare la singola partecipazione, viene utilizzato come identificatore \textit{}
 	\paragraph{Indirizzo}
 	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola occorrenza.
-\end{document}
+	\subsubsection{Schema ER ristrutturato}	
+	\includegraphics[height=\textwidth, width=23cm, angle=90]{SchemaER_Rev}
+	\subsection{Traduzione nel modello relazionale}
+	\textbf{Cinema}(\underline{Nome}, Indirizzo)\\
+	\textit{vincolo di integrita' tra "Indirizzo" ed "Id" in Indirizzo}\\\\
+	\textbf{Sala}(\underline{Numero}, \underline{Cinema}, Capienza, Grandezza\_schermo)\\
+	\textit{Vincolo di integrita' tra "Cinema" e "Nome" in Cinema}\\\\
+	\textbf{Spettacolo}(\underline{Id}, Dataora\_inizio, 3D, Film, Sala, Cinema)\\
+	\textit{Vincolo di integrita' tra "Film" ed "Id" in Film, "Sala" e "Id" in Sala e tra "Cinema" e "Cinema" in Sala}\\\\
+	\textbf{Biglietto}(\underline{Id}, n\_posto, Spettacolo, Persona)\\
+	\textit{Vincolo di integrita' tra "Spettacolo" ed "Id" in Spettacolo e tra "Persona" e "Id" in Persona}\\\\
+	\textbf{Film}(\underline{Id}, Titolo, Anno, Durata, Genere, Trama, Cast)\\
+	\textit{Vincolo di integrita' tra "Cast" e "Id" in Cast}\\\\
+	\textbf{Recensione}(\underline{Film}, \underline{Persona}, Commento, Voto)\\
+	\textit{Vincolo di integrita' tra "Film" e "Id" in Film e tra "Persona" e "Id" in Persona}\\\\
+	\textbf{Persona}(\underline{Id}, Nome, Cognome, Data\_nascita)\\\\
+	\textbf{Lavoratore}(\underline{Persona}, \underline{Ruolo}, Salario)\\
+	\textit{Vincolo di integrita' tra "Persona" e "Id" in Persona}\\\\
+	\textbf{Cast}(\underline{Id}, Nome)\\\\
+	\textbf{Partecipazione}(\underline{Lavoratore}, \underline{Cast})
+\end{document} 
