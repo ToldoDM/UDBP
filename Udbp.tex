@@ -356,5 +356,22 @@
 	\subsubsection{Scelta degli identificatori primari}
 	\paragraph{Cinema}
 	Come scelta dell'identificatore primario nell'entita', viene scelto l'attributo \textit{Nome}, perche' il nome identifica un singolo cinema.
-	
+	\paragraph{Sala}
+	Per identificare una sala, viene scelto come identificatore il numero della sala, \textit{numero}, e il cinema di appartenenza, \textit{nome\_cinema}. Questo perche' all'interno del cinema il numero della sala e' univoco.
+	\paragraph{Spettacolo}
+	Per identificare uno spettacolo bisognerebbe fare riferimento all'attributo \textit{dataora\_inizio} insieme alla \textit{sala} e al \textit{film}. Quindi per semplicita' viene aggiunto un nuovo attributo identificatore \textit{Id}, cio' semplifica e rende meno ambigua l'identificazione di una occorrenza all'interno di spettacolo.
+	\paragraph{Biglietto}
+	Per identificare il singolo biglietto si ricorre all'utilizzo di un identificatore \textit{Id}, questo per la stessa motivazione presente in \textit{Spettacolo}.
+	\paragraph{Film}
+	Per identificare un singolo film, bisognerebbe comprendere \textit{Titolo, Anno, Genere e Durata}, dato che potrebbe verificarsi l'uscita di un film omonimo nello stesso anno con lo stesso genere. Quindi per semplificare e rendere ancora piu' forte l'identificazione, viene introdotto l'attributo identificatore \textit{Id}.
+	\paragraph{Recensione}
+	Per identificare la singola recensione si ricorre all'utilizzo di un identificatore \textit{Id}, questo per la stessa motivazione presente in \textit{Spettacolo}.
+	\paragraph{Persona}
+	Per identificare una persona, \textit{Nome, Cognome e Data\_nascita} possono risultare inadeguati per identificare una singola occorrenza, quindi viene introdotto l'attributo identificatore \textit{Id}.
+	\paragraph{Lavoratore}
+	Per identificare un lavoratore, viene utilizzato il suo \textit{Ruolo} e il riferimento a persona \textit{Id\_persona}, questo perche' un lavoratore puo' assumere piu' ruoli all'interno di un cast.
+	\paragraph{Cast}
+	Per identificare un cast si ricorre all'utilizzo di un identificatore \textit{Id}, questo perche' potrebbero esserci cast omonimi.
+	\paragraph{Indirizzo}
+	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola occorrenza.
 \end{document}
