@@ -352,48 +352,46 @@
 	A sua volta la generalizzazione di \textit{Lavoratore} ha quattro entita' figlie: \textit{Attore}, \textit{Sceneggiatore}, \textit{Produttore} e \textit{Regista}.\\
 	Essendo in questo caso una generalizzazione completa, e non essendoci associazioni dirette con le entita' figlie, si e' deciso di accorpare le entita' figlie all'interno dell'entita' \textit{Lavoratore}, aggiungendone un nuovo attributo \textit{Ruolo}, il quale ha lo scopo di identificare i vari ruoli svolti dal lavoratore.
 	\subsubsection{Introduzione entita' indirizzo}
-	Per rappresentare le informazioni sull’indirizzo riguardanti la posizione di un \textit{Cinema}, è stata introdotta l’entità \textit{Indirizzo}. Questa entità contiene i seguenti attributi: cap, via, provincia, regione, nazione e città. \textit{Cinema} sara' l'unica entita' collegata ad \textit{Indirizzo}.
+	Per rappresentare le informazioni sull’indirizzo riguardanti la posizione di un \textit{Cinema}, è stata introdotta l’entità \textit{Indirizzo}. Questa entità contiene i seguenti attributi: cap, via, numero civico, nazione e città. \textit{Cinema} sara' l'unica entita' collegata ad \textit{Indirizzo}.
 	\subsubsection{Scelta degli identificatori primari}
 	\paragraph{Cinema}
 	Come scelta dell'identificatore primario nell'entita', viene scelto l'attributo \textit{Nome}, perche' il nome identifica un singolo cinema.
 	\paragraph{Sala}
-	Per identificare una sala, viene scelto come identificatore il numero della sala, \textit{numero}, e il cinema di appartenenza, \textit{nome\_cinema}. Questo perche' all'interno del cinema il numero della sala e' univoco.
+	Per identificare una sala, viene scelto come identificatore il numero della sala, \textit{numero}, e il cinema di appartenenza, \textit{Cinema}. Questo perche' all'interno del cinema il numero della sala e' univoco.
 	\paragraph{Spettacolo}
-	Per identificare uno spettacolo bisognerebbe fare riferimento all'attributo \textit{dataora\_inizio} insieme alla \textit{sala} e al \textit{film}. Quindi per semplicita' viene aggiunto un nuovo attributo identificatore \textit{Id}, cio' semplifica e rende meno ambigua l'identificazione di una occorrenza all'interno di spettacolo.
+	Per identificare uno spettacolo bisognerebbe fare riferimento all'attributo \textit{dataora\_inizio} insieme alla \textit{sala} e al \textit{film}. Quindi per semplicita' viene aggiunto un nuovo attributo identificatore \textit{Id}, cio' semplifica e rende meno ambigua l'identificazione di una tupla all'interno di spettacolo.
 	\paragraph{Biglietto}
 	Per identificare il singolo biglietto si ricorre all'utilizzo di un identificatore \textit{Id}, questo per la stessa motivazione presente in \textit{Spettacolo}.
 	\paragraph{Film}
 	Per identificare un singolo film, bisognerebbe comprendere \textit{Titolo, Anno, Genere e Durata}, dato che potrebbe verificarsi l'uscita di un film omonimo nello stesso anno con lo stesso genere. Quindi per semplificare e rendere ancora piu' forte l'identificazione, viene introdotto l'attributo identificatore \textit{Id}.
 	\paragraph{Recensione}
-	Per identificare la singola recensione si utilizza \textit{Persona e Film}, dato che la coppia ne identifica una occorrenza
+	Per identificare la singola recensione si utilizza \textit{Persona e Film}, dato che la coppia ne identifica una tupla.
 	\paragraph{Persona}
-	Per identificare una persona, \textit{Nome, Cognome e Data\_nascita} possono risultare inadeguati per identificare una singola occorrenza, quindi viene introdotto l'attributo identificatore \textit{Id}.
+	Per identificare una persona, \textit{Nome, Cognome e Data\_nascita} possono risultare inadeguati, quindi viene introdotto l'attributo identificatore \textit{Id}.
 	\paragraph{Lavoratore}
-	Per identificare un lavoratore, viene utilizzato il suo \textit{Ruolo} e il riferimento a persona \textit{Id\_persona}, questo perche' un lavoratore puo' assumere piu' ruoli all'interno di un cast.
+	Per identificare un lavoratore, viene utilizzato il suo \textit{Ruolo}, il riferimento a persona \textit{Persona} e la sua presenza ad un \textit{Cast}, questo perche' un lavoratore puo' assumere piu' ruoli all'interno di un cast.
 	\paragraph{Cast}
 	Per identificare un cast si ricorre all'utilizzo di un identificatore \textit{Id}, questo perche' potrebbero esserci cast omonimi.
-	\paragraph{Partecipazione}
-	Per identificare la singola partecipazione, viene utilizzato come identificatore \textit{}
 	\paragraph{Indirizzo}
-	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola occorrenza.
+	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola tupla.
 	\subsubsection{Schema ER ristrutturato}	
 	\includegraphics[height=\textwidth, width=23cm, angle=90]{SchemaER_Rev}
 	\subsection{Traduzione nel modello relazionale}
 	\textbf{Cinema}(\underline{Nome}, Indirizzo)\\
-	\textit{vincolo di integrita' tra "Indirizzo" ed "Id" in Indirizzo}\\\\
+	\textit{vincolo di integrita' referenziale tra "Indirizzo" ed "Id" in Indirizzo.}\\\\
 	\textbf{Sala}(\underline{Numero}, \underline{Cinema}, Capienza, Grandezza\_schermo)\\
-	\textit{Vincolo di integrita' tra "Cinema" e "Nome" in Cinema}\\\\
+	\textit{Vincolo di integrita' referenziale tra "Cinema" e "Nome" in Cinema.}\\\\
 	\textbf{Spettacolo}(\underline{Id}, Dataora\_inizio, 3D, Film, Sala, Cinema)\\
-	\textit{Vincolo di integrita' tra "Film" ed "Id" in Film, "Sala" e "Id" in Sala e tra "Cinema" e "Cinema" in Sala}\\\\
+	\textit{Vincolo di integrita' referenziale tra "Film" ed "Id" in Film, "Sala" e "Id" in Sala e tra "Cinema" e "Cinema" in Sala.}\\\\
 	\textbf{Biglietto}(\underline{Id}, n\_posto, Spettacolo, Persona)\\
-	\textit{Vincolo di integrita' tra "Spettacolo" ed "Id" in Spettacolo e tra "Persona" e "Id" in Persona}\\\\
+	\textit{Vincolo di integrita' referenziale tra "Spettacolo" ed "Id" in Spettacolo e tra "Persona" e "Id" in Persona.}\\\\
 	\textbf{Film}(\underline{Id}, Titolo, Anno, Durata, Genere, Trama, Cast)\\
-	\textit{Vincolo di integrita' tra "Cast" e "Id" in Cast}\\\\
+	\textit{Vincolo di integrita' referenziale tra "Cast" e "Id" in Cast}.\\\\
 	\textbf{Recensione}(\underline{Film}, \underline{Persona}, Commento, Voto)\\
-	\textit{Vincolo di integrita' tra "Film" e "Id" in Film e tra "Persona" e "Id" in Persona}\\\\
+	\textit{Vincolo di integrita' referenziale tra "Film" e "Id" in Film e tra "Persona" e "Id" in Persona.}\\\\
 	\textbf{Persona}(\underline{Id}, Nome, Cognome, Data\_nascita)\\\\
-	\textbf{Lavoratore}(\underline{Persona}, \underline{Ruolo}, Salario)\\
-	\textit{Vincolo di integrita' tra "Persona" e "Id" in Persona}\\\\
-	\textbf{Cast}(\underline{Id}, Nome)\\\\
-	\textbf{Partecipazione}(\underline{Lavoratore}, \underline{Cast})
+	\textbf{Lavoratore}(\underline{Persona}, \underline{Cast}, \underline{Ruolo}, Salario)\\	
+	\textit{Vincolo di integrita' referenziale tra "Persona" e "Id" in Persona e tra "Cast" e "Id" in Cast}.\\\\
+	\textbf{Cast}(\underline{Id}, Nome).\\\\
+	\textbf{Indirizzo}(\underline{Id}, Via, Citta, n\_civ, Stato, Cap)\\\\
 \end{document} 
