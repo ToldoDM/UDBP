@@ -4,9 +4,9 @@
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
 \usepackage[table]{xcolor}
-%\usepackage{fontspec} 
+\usepackage{fontspec} 
 \usepackage{graphicx}
-%\setmainfont{Arial}
+\setmainfont{Arial}
 \graphicspath{ {./Schemas/} }
 
 \begin{document}
@@ -80,9 +80,9 @@
 	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, perche' il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori informazioni sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al clinte la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
 	\section{Analisi dei requisiti}
 	
-	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena UCI cinema.
+	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena D4C cinema.
 			
-	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
+	Essendo D4C cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
 	\begin{itemize}
 		\item Nome cinema
 		\item Numero sale
@@ -338,7 +338,7 @@
 	L'attributo \textbf{posti\_venduti}, cosi' come indicato nello schema ER, indica il numero totale di posti venduti per uno spettacolo.
 	\begin{table}[h!]
 		\centering
-		\caption{\textbf{Operazione 2}} \label{tab:sometab}
+		\caption{\textbf{Operazione 2 con ridondanza}} \label{tab:Op2 ridondanza}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
@@ -355,7 +355,7 @@
 		\begin{itemize}
 			\item Costi 3*2500 + 1*2500 = 17500 accessi 
 		\end{itemize}
-		\caption{\textbf{Operazione 6}} \label{tab:sometab}
+		\caption{\textbf{Operazione 6 con ridondanza}} \label{tab:Op6 ridondanza}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
@@ -367,12 +367,13 @@
 		\item Costi 1*200 = 200 accessi 
 		\end{itemize}
 	\end{table}
+
 	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 17500*7 + 200 = 122700 accessi.
 	\subsubsection{Assenza di ridondanza}
 	In questo caso per calcolare i posti venduti senza l'attributo posti\_venduti, bisogna fare riferimento alla relazione \textbf{Spettacolo-Biglietto} (relazione di nome "Fa' riferimento") e contarne le rispettive occorrenze.	
 	\begin{table}[h!]
 		\centering
-		\caption{\textbf{Operazione 2}} \label{tab:sometab}
+		\caption{\textbf{Operazione 2 senza ridondanza}} \label{tab:Op2 w/o ridondanza}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
@@ -385,7 +386,7 @@
 		\begin{itemize}
 			\item Costi 2*2500 = 10000 accessi 
 		\end{itemize}
-		\caption{\textbf{Operazione 6}} \label{tab:sometab}
+		\caption{\textbf{Operazione 6 senza ridondanza}} \label{tab:Op6 w/o ridondanza}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\textbf{Concetto} & \textbf{Costrutto} & \textbf{Accessi} & \textbf{Tipo} \\
@@ -399,6 +400,7 @@
 			\item Costi 1*200 + 140*200 = 28200 accessi
 		\end{itemize}
 	\end{table}
+
 	Il totale degli accessi, essendo l'operazione 2 giornaliera e l'operazione 6 settimanale, si calcola in questo modo: 10000*7 + 28200 = 108200 accessi.\\\\
 	In coclusione la ridondanza del dato non porta vantaggi, di conseguenza si e' deciso di eliminarla.
 	\subsection{Ristrutturazione schema ER}
