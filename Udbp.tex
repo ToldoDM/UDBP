@@ -10,17 +10,74 @@
 \graphicspath{ {./Schemas/} }
 
 \begin{document}
-	\section{Bozza}
-	si vuole realizzare una base di dati per l'organizzazione per una catena di cinema, chiamato per comodita' UIC Cinemas.
 	
-	La UCI Cinemas ha in possesso molteplici cinema situati in diverse citta'. Ogni cinema e' un multisala composto dalle 5 alle 10 sale ciascuna con posti che variano da 50 a 250 posti numerati. Ogni film proiettato varia  in lunghezza, genere, e cast (composto  da attori, sceneggiatori e produttori).
-	La programmazione della proiezione dei film puo' variare di giorno in giorno (varia in base ai giorni della settimana, per esempio Martedi' vengono proiettati meno film rispetto al weekend) e comprende la proiezione un film in un cinema in una sala ad un ora specifica e nella durata totale della proiezone sono compresi dai 15 ai 30 min di pubblicita' (nelle programmazioni piu corpose vengono proiettati piu' film, di conseguenza viene ridotto la durata della pubblicita').
-	Il consumatore per vedere un film deve acquistare un biglietto, tramite portale on-line o in biglietteria. Tale biglietto contiene all'interno informazioni inerenti a: cinema dove e la sala dove avviene la proiezione, il film di interesse, l'ora e il giorno di inizio film e il numero del posto [(il posto viene assegnato automaticamente al momento dell'acquisto)].
-	
-	
-	\section{Abstract}
-	
-	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Come ogni cinema, D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare alle persone varia scelta per l'orario. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, perche' il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori informazioni sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al clinte la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
+	\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+		\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+		
+		\center % Centre everything on the page
+		
+		%------------------------------------------------
+		%	Headings
+		%------------------------------------------------
+		
+		\textsc{\LARGE Universita' degli studi di Padova}\\[1.5cm] % Main heading such as the name of your university/college
+		
+		\textsc{\Large D4C Cinemas}\\[0.5cm] % Major heading such as course name
+		
+		
+		%------------------------------------------------
+		%	Title
+		%------------------------------------------------
+		
+		\HRule\\[0.4cm]
+		
+		{\huge\bfseries Progetto Basi di Dati}\\[0.2cm] % Title of your document
+		
+		\HRule\\[1.5cm]
+		
+		%------------------------------------------------
+		%	Author(s)
+		%------------------------------------------------
+		
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushleft}
+				\large
+				Damiano \textsc{Bertoldo} % Your name
+			\end{flushleft}
+		\end{minipage}
+		~
+		\begin{minipage}{0.4\textwidth}
+			\begin{flushright}
+				\large
+				Alessandro \textsc{Canel} % Supervisor's name
+			\end{flushright}
+		\end{minipage}
+		
+		% If you don't want a supervisor, uncomment the two lines below and comment the code above
+		{\large\textit{}}\\
+		\textsc{2019/2020} % Your name
+		
+		%------------------------------------------------
+		%	Date
+		%------------------------------------------------
+		
+		\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+		
+		
+		%------------------------------------------------
+		%	Logo
+		%------------------------------------------------
+		
+		%\vfill\vfill
+		%\includegraphics[width=0.2\textwidth]{placeholder.jpg}\\[1cm] % Include a department/university logo - this will require the graphicx package
+		
+		%----------------------------------------------------------------------------------------
+		
+		\vfill % Push the date up 1/4 of the remaining page		
+		\tableofcontents
+	\end{titlepage}
+	\section{Abstract}	
+	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, perche' il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori informazioni sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al clinte la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
 	\section{Analisi dei requisiti}
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena UCI cinema.
