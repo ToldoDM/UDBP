@@ -136,4 +136,60 @@ INSERT INTO Lavoratore (Id_Persona,Id_Cast,Ruolo,Salario)
 INSERT INTO Lavoratore (Id_Persona,Id_Cast,Ruolo,Salario)
 	VALUES (21,4,'Sceneggiatore',1000);
 
+--Popolamento Sala
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(1,'D4C Mestre', 250, 250);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(2,'D4C Mestre', 150, 200);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(3,'D4C Mestre', 75, 150);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(4,'D4C Mestre', 50, 100);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(5,'D4C Mestre', 200, 200);
+
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(1,'D4C Marcon', 250, 250);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(2,'D4C Marcon', 150, 200);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(3,'D4C Marcon', 75, 150);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(4,'D4C Marcon', 50, 100);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(5,'D4C Marcon', 200, 200);
+
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(1,'D4C Silea', 250, 250);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(2,'D4C Silea', 150, 200);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(3,'D4C Silea', 75, 150);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(4,'D4C Silea', 50, 100);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(5,'D4C Silea', 200, 200);
+
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(1,'D4C Milano', 250, 250);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(2,'D4C Milano', 150, 200);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(3,'D4C Milano', 75, 150);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(4,'D4C Milano', 50, 100);
+INSERT INTO Sala(Nuemero,Nome_Cinema,Capienza,Grandezza_schermo)
+	VALUES(5,'D4C Milano', 200, 200);
+
+--Popolamento Film
+INSERT INTO Film(Id,Titolo,Anno,Durata,Genere,Trama,Id_Cast)
+	VALUES(1,'The Matrix', 2007, '01:30:00', 'Azione', 'Trama molto lunga, in ogni caso muoiono tutti',1)
+INSERT INTO Film(Id,Titolo,Anno,Durata,Genere,Trama,Id_Cast)
+	VALUES(1,'Matrix 2', 2009, '02:10:00', 'Azione', 'Trama molto lunga, in ogni caso muoiono tutti',1)
+INSERT INTO Film(Id,Titolo,Anno,Durata,Genere,Trama,Id_Cast)
+	VALUES(1,'Jumanji', 2008, '01:20:00', 'Avventura', 'Trama molto lunga, in ogni caso muoiono tutti',2)
+INSERT INTO Film(Id,Titolo,Anno,Durata,Genere,Trama,Id_Cast)
+	VALUES(1,'Mediterraneo', 2010, '01:10:00', 'Drammatico', 'Trama molto lunga, in ogni caso muoiono tutti',3)
+INSERT INTO Film(Id,Titolo,Anno,Durata,Genere,Trama,Id_Cast)
+	VALUES(1,'Film Indie', 2014, '00:50:00', 'Thriller', 'Trama molto lunga, in ogni caso muoiono tutti',4)
 
