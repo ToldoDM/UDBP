@@ -435,23 +435,23 @@
 	\paragraph{Indirizzo}
 	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola tupla.
 	\subsubsection{Schema ER ristrutturato}	
-	\includegraphics[height=\textwidth, width=23cm, angle=90]{SchemaER_Rev}
+	\includegraphics[height=\textwidth, width=20cm, angle=90]{SchemaER_Rev}
 	\subsection{Traduzione nel modello relazionale}
-	\textbf{Cinema}(\underline{Nome}, Indirizzo)\\
-	\textit{vincolo di integrita' referenziale tra "Indirizzo" ed "Id" in Indirizzo.}\\\\
-	\textbf{Sala}(\underline{Numero}, \underline{Cinema}, Capienza, Grandezza\_schermo)\\
-	\textit{Vincolo di integrita' referenziale tra "Cinema" e "Nome" in Cinema.}\\\\
-	\textbf{Spettacolo}(\underline{Id}, Dataora\_inizio, 3D, Film, Sala, Cinema)\\
-	\textit{Vincolo di integrita' referenziale tra "Film" ed "Id" in Film, "Sala" e "Id" in Sala e tra "Cinema" e "Cinema" in Sala.}\\\\
-	\textbf{Biglietto}(\underline{Id}, n\_posto, Spettacolo, Persona)\\
-	\textit{Vincolo di integrita' referenziale tra "Spettacolo" ed "Id" in Spettacolo e tra "Persona" e "Id" in Persona.}\\\\
-	\textbf{Film}(\underline{Id}, Titolo, Anno, Durata, Genere, Trama, Cast)\\
-	\textit{Vincolo di integrita' referenziale tra "Cast" e "Id" in Cast}.\\\\
-	\textbf{Recensione}(\underline{Film}, \underline{Persona}, Commento, Voto)\\
-	\textit{Vincolo di integrita' referenziale tra "Film" e "Id" in Film e tra "Persona" e "Id" in Persona.}\\\\
+	\textbf{Cinema}(\underline{Nome}, Id\_Indirizzo)\\
+	\textit{vincolo di integrita' referenziale tra "Id\_Indirizzo" ed "Id" in Indirizzo.}\\\\
+	\textbf{Sala}(\underline{Numero}, \underline{Nome\_Cinema}, Capienza, Grandezza\_schermo)\\
+	\textit{Vincolo di integrita' referenziale tra "Nome\_Cinema" e "Nome" in Cinema.}\\\\
+	\textbf{Spettacolo}(\underline{Id}, Dataora\_inizio, 3D, Id\_Film, Num\_Sala, Nome\_Cinema)\\
+	\textit{Vincolo di integrita' referenziale tra "Id\_Film" ed "Id" in Film, "Num\_Sala" e "Numero" in Sala e tra "Nome\_Cinema" e "Cinema" in Sala.}\\\\
+	\textbf{Biglietto}(\underline{Id}, n\_posto, Id\_Spettacolo, Id\_Persona)\\
+	\textit{Vincolo di integrita' referenziale tra "Id\_Spettacolo" ed "Id" in Spettacolo e tra "Id\_Persona" e "Id" in Persona.}\\\\
+	\textbf{Film}(\underline{Id}, Titolo, Anno, Durata, Genere, Trama, Id\_Cast)\\
+	\textit{Vincolo di integrita' referenziale tra "Id\_Cast" e "Id" in Cast}.\\\\
+	\textbf{Recensione}(\underline{Id\_Film}, \underline{Id\_Persona}, Commento, Voto)\\
+	\textit{Vincolo di integrita' referenziale tra "Id\_Film" e "Id" in Film e tra "Id\_Persona" e "Id" in Persona.}\\\\
 	\textbf{Persona}(\underline{Id}, Nome, Cognome, Data\_nascita)\\\\
-	\textbf{Lavoratore}(\underline{Persona}, \underline{Cast}, \underline{Ruolo}, Salario)\\	
-	\textit{Vincolo di integrita' referenziale tra "Persona" e "Id" in Persona e tra "Cast" e "Id" in Cast}.\\\\
+	\textbf{Lavoratore}(\underline{Id\_Persona}, \underline{Id\_Cast}, \underline{Ruolo}, Salario)\\	
+	\textit{Vincolo di integrita' referenziale tra "Id\_Persona" e "Id" in Persona e tra "Id\_Cast" e "Id" in Cast}.\\\\
 	\textbf{Cast}(\underline{Id}, Nome).\\\\
 	\textbf{Indirizzo}(\underline{Id}, Via, Citta, n\_civ, Stato, Cap)\\\\
 \end{document} 
