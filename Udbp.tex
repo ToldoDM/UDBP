@@ -4,9 +4,9 @@
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
 \usepackage[table]{xcolor}
-\usepackage{fontspec} 
+%\usepackage{fontspec} 
 \usepackage{graphicx}
-\setmainfont{Arial}
+%\setmainfont{Arial}
 \graphicspath{ {./Schemas/} }
 
 \begin{document}
@@ -85,17 +85,21 @@
 	Essendo UCI cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
 	\begin{itemize}
 		\item Nome cinema
-		\item Quantita' sale
-		\item Indirizzo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
+		\item Numero sale
+		\item Luogo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
 	\end{itemize}
 	Per poter identificare una {\bf Sala} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
 	\begin{itemize}
 		\item Numero sala (univoco all'interno del cinema)
-		\item Cinema di appartenenza
 		\item Numero posti
+		\item Cinema di appartenenza
 		\item Grandezza schermo (espresso in pollici)
 	\end{itemize}
-	All'interno di ogni sala viene proiettato un {\bf Film}:
+	Per ogni {\bf Sala} vine assegnato un entità {\bf Spettacolo} contenente, in quanto necessaria per l'organizzazioni degli orari di proiezione:
+	\begin{itemize}
+	    \item data/orario
+	\end{itemize}
+	L'entità spettacolo necessita di essere assegnata a {\bf Film} dato che ogni necessita di un tempo diverso da film a film:
 	\begin{itemize}
 		\item Titolo
 		\item Durata
@@ -103,41 +107,35 @@
 		\item Genere
 		\item Anno
 	\end{itemize}
-	Per conoscere il cast del film abbiamo bisogno di definire \textbf{Cast}:
+	Ciascun film è prodotto da un cast {\bf Cast}, di cui si conosce:
 	\begin{itemize}
-		\item Film
-		\item Lavoratore
+		\item Nome
 	\end{itemize}
-	Inoltre c'e' bisogno di conoscere il nome e il ruolo delle persone che ne hanno preso parte, e si possono suddividere in:
+	Per conoscere il cast del film, E necesssario avere nome e ruolo delle persone che ne hanno fatto parte, dette persone fanno parte dell'entità {\bf Lavoratore}, che a sua volta è una specalizzazione dei suddetti organi di produzione cinematografica:
 	\begin{itemize}
 		\item {\bf Attore}: persona che ha recitato nel film 
 		\item {\bf Sceneggiatore}: persona che ha strutturato la sceneggiatura del film 
 		\item {\bf Produttore}: persona che ha finanziato il film 
 		\item {\bf Regista}: persona che ha diretto il film
 	\end{itemize}		 
-	Di conseguenza abbiamo bisogno di definire {\bf Lavoratore}. Essendoci possibilita' di omonimia con stessa data di nascita, si preferisce utilizzare un identificativo:
+	Di conseguenza è necessario definire {\bf Persona}, in quanto ogni {\bf Lavoratore} è per l'appunto, una persona e quindi tale entità dovra comprendere:
 	\begin{itemize}
-		\item Id
-		\item Nome
+		\item id
+		\item nome
 		\item Cognome
 		\item Data di nascita
-		\item Indirizzo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
 	\end{itemize}
-	Il cinema per emettere i biglietti non ha bisogno delle credenziali del cliente, di conseguenza il bilgietto non e' nomintivo. Il {\bf Biglietto} ha le seguenti caratteristiche:
-	\begin{itemize}	
-		\item Film (film di interesse)
-		\item Data e ora proiezione
-		\item Cinema (dove viene proiettato il film)
-		\item Sala
-		\item Posto (scelto dall'utente al momento dell'acquisto)
+	Ogni persona in quanto tale, potrà acquistare un biglietto per un qualsivoglia film. Il {\bf Biglietto} conterrà:
+	\begin{itemize}
+		\item n.posto
 	\end{itemize}
- 	Per massimizzare l'utilizzo delle sale viene creata una \textbf{Programmazione} in cui vengono specificati gli orari di inizio dei vari film per i vari giorni, quindi sono necessarie le seguenti informazioni:
- 	\begin{itemize}
- 		\item Cinema
- 		\item Sala
- 		\item Film
- 		\item Data e ora proiezione
- 	\end{itemize} 
+	Quest'ultimo farà riferimento allo spettacolo; discusso in precedenza.
+	Qualsiasi persona potrà inoltre rilasciare una {\bf recensione} inerente al film. L'entità recensione conterrà:
+	\begin{itemize}
+		\item id cliente
+		\item commento
+		\item voto
+	\end{itemize}
  	\subsection{Lista delle operazioni}		
 	\textbf{Operazione 1}: Aggiuta di uno spettacolo per la proiezione di un film in una sala (40 volte al giorno) \\
 	\textbf{Operazione 2}: Emissione biglietti (2500 volte al giorno)\\
@@ -153,13 +151,18 @@
  		\rowcolor{lightgray}
  		\textbf{Termine} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{Collegamenti} \\
  		\hline
- 		Programmazione                         & Pianificazione orario inizio film all'interno del cinema                &                                                                                      & Film, Sala, biglietto                                                             \\ \hline
- 		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Programmazione, Cinema \\ \hline
- 		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Programmazione \\ \hline
- 		Lavoratore                                & Persona singola che ha preso parte alla realizzazione di almeno un Film                  & Attore, Sceneggiatore, Produttore, Regista & Cast                                                                        \\ \hline
- 		Film                                   & Film presenti al cinema                                                 &                                                                                      & Programmazione, Biglietto, Cast        \\ \hline
- 		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      & Sala        \\ \hline
- 		Cast                                   &    Cast del film &                                                                                      & Film, Lavoratore        \\ \hline
+ 		Spettacolo                         & Manifestazione artistica o ricreativa presentata a un pubblico               &                                                                                      & Biglietto, Film, Sala                                                             \\ \hline
+ 		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Cinema, Spettacolo \\ \hline
+ 		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Spettacolo, Persona                                                               \\ \hline
+ 		Lavoratore                                & Persona singola che lavora                 & Attore, Sceneggiatore, Produttore, Regista & Cast, Persona                                                                        \\ \hline
+ 		Cast & Lavoratore che fa parte del film &  & Lavoratore,Film \\ \hline 
+ 		
+ 		Persona & Sia soggetto pagante che soggetto lavorante & & Recesione, Biglietto
+ 		        \\ \hline
+ 		Film                                   & Film presenti al cinema                                                 &                                                                                      & Cast, Recensione, Spettacolo       \\ \hline
+ 		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      &  Sala        \\ \hline
+ 		Recensione                               & Recensioni da clienti paganti
+ 		&                                       & Film, Persona \\ \hline
  	\end{tabular}
  	\subsection{Strutturazione dei requisiti}
 	\begin{tabular} { |p{16.8cm}| }
