@@ -82,24 +82,27 @@
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena D4C cinema.
 			
-	Essendo D4C cinemas una catena, e' necessario identificare la localita' di ciascun {\bf Cinema}:
+	Essendo D4C cinemas una catena, e' necessario identificare ciascun {\bf Cinema}:
 	\begin{itemize}
 		\item Nome cinema
-		\item Numero sale
-		\item Luogo, cosi' composto: via, citta', provincia, codice postale, regione, nazione
+		\item Indirizzo, cosi' composto: via, citta', numero civico, codice postale, nazione
 	\end{itemize}
 	Per poter identificare una {\bf Sala} all'interno del cinema abbiamo bisogno delle sguenti informazioni:
 	\begin{itemize}
 		\item Numero sala (univoco all'interno del cinema)
-		\item Numero posti
 		\item Cinema di appartenenza
+		\item Numero posti
 		\item Grandezza schermo (espresso in pollici)
 	\end{itemize}
-	Per ogni {\bf Sala} vine assegnato un entità {\bf Spettacolo} contenente, in quanto necessaria per l'organizzazioni degli orari di proiezione:
+	Per ogni Sala vengono proiettati vari film durante la giornata. Tali orari sono definiti nell'entita' {\bf Spettacolo}:
 	\begin{itemize}
-	    \item data/orario
+		\item Film
+		\item Sala di proiezione
+	    \item Data ora film
+	    \item 3D
+	    \item Posti venduti
 	\end{itemize}
-	L'entità spettacolo necessita di essere assegnata a {\bf Film} dato che ogni necessita di un tempo diverso da film a film:
+	I clienti del cinema durante la scelta del film devono avere la possibilita' di consultare le informazioni dei vari \textbf{Film}, dati che servono anche per l'organizzazione degli spettacoli:
 	\begin{itemize}
 		\item Titolo
 		\item Durata
@@ -111,7 +114,13 @@
 	\begin{itemize}
 		\item Nome
 	\end{itemize}
-	Per conoscere il cast del film, E necesssario avere nome e ruolo delle persone che ne hanno fatto parte, dette persone fanno parte dell'entità {\bf Lavoratore}, che a sua volta è una specalizzazione dei suddetti organi di produzione cinematografica:
+	Per sapere da chi e' composto il cast del film, e' necesssario avere nome e ruolo delle persone che ne hanno fatto parte, dette persone fanno parte dell'entità {\bf Lavoratore}, e viene inteso come persone che hanno lavorato con mansioni in ambito cinematografico:
+	\begin{itemize}
+		\item Persona
+		\item Cast
+		\item Salario
+	\end{itemize}
+	Lavoratore a sua volta ha come sottocategoria le seguenti mansioni, dato che lavoratore viene inteso come persona che ha partecipato in mansioni per la relizzazione di un film:
 	\begin{itemize}
 		\item {\bf Attore}: persona che ha recitato nel film 
 		\item {\bf Sceneggiatore}: persona che ha strutturato la sceneggiatura del film 
@@ -120,21 +129,23 @@
 	\end{itemize}		 
 	Di conseguenza è necessario definire {\bf Persona}, in quanto ogni {\bf Lavoratore} è per l'appunto, una persona e quindi tale entità dovra comprendere:
 	\begin{itemize}
-		\item id
-		\item nome
+		\item Nome
 		\item Cognome
 		\item Data di nascita
+		\item Sesso
 	\end{itemize}
 	Ogni persona in quanto tale, potrà acquistare un biglietto per un qualsivoglia film. Il {\bf Biglietto} conterrà:
 	\begin{itemize}
-		\item n.posto
+		\item Persona di appartenenza
+		\item Spettacolo
+		\item Numero posto
 	\end{itemize}
-	Quest'ultimo farà riferimento allo spettacolo; discusso in precedenza.
-	Qualsiasi persona potrà inoltre rilasciare una {\bf recensione} inerente al film. L'entità recensione conterrà:
+	Qualsiasi persona potrà inoltre rilasciare una {\bf Recensione} inerente al film appnea visto. L'entità recensione conterrà:
 	\begin{itemize}
-		\item id cliente
-		\item commento
-		\item voto
+		\item Persona
+		\item Film
+		\item Commento
+		\item Voto
 	\end{itemize}
  	\subsection{Lista delle operazioni}		
 	\textbf{Operazione 1}: Aggiuta di uno spettacolo per la proiezione di un film in una sala (40 volte al giorno) \\
@@ -154,10 +165,10 @@
  		Spettacolo                         & Manifestazione artistica o ricreativa presentata a un pubblico               &                                                                                      & Biglietto, Film, Sala                                                             \\ \hline
  		Sala                                   & Stanza dove viene proiettato il Film                                    &                                                                                      & Cinema, Spettacolo \\ \hline
  		Biglietto                              & Acquisto del cliente, che attesta la vendita del posto per un dato film &                                                                                      & Spettacolo, Persona                                                               \\ \hline
- 		Lavoratore                                & Persona singola che lavora                 & Attore, Sceneggiatore, Produttore, Regista & Cast, Persona                                                                        \\ \hline
- 		Cast & Lavoratore che fa parte del film &  & Lavoratore,Film \\ \hline 
+ 		Lavoratore                                & Persona che lavora all'interno di un cast             & Attore, Sceneggiatore, Produttore, Regista & Cast, Persona                                                                        \\ \hline
+ 		Cast & Gruppo di lavoratori che ha preso parte alla realizzazione del film &  & Lavoratore,Film \\ \hline 
  		
- 		Persona & Sia soggetto pagante che soggetto lavorante & & Recesione, Biglietto
+ 		Persona & Persona cliente del cinema e/o lavoratore & & Recesione, Biglietto
  		        \\ \hline
  		Film                                   & Film presenti al cinema                                                 &                                                                                      & Cast, Recensione, Spettacolo       \\ \hline
  		Cinema                                   &    Impresa che offre il servizio cinematografico &                                                                                      &  Sala        \\ \hline
@@ -170,7 +181,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Cinema"} \\
  		\hline
- 		I Cinema vengono identificati tramite: Nome cinema, Quantita' sale, Indirizzo (composto da via, citta', provincia, codice postale, regione, nazione) \\
+ 		I Cinema vengono identificati tramite: Nome cinema, Indirizzo (composto da via, citta', numero civico, codice postale, nazione) \\
  		\hline 		
  	\end{tabular}
  	\\\\\\
@@ -179,7 +190,7 @@
 	 	\rowcolor{lightgray}
 	 	\textbf{Frasi relative a "Sala"} \\
 	 	\hline
-	 	Le Sale vengono identificate tramite: Numero sale (univoco all'interno del cinema), Numero posti, Cinema di appartenenza, Grandezza schermo (espresso in pollici) \\
+	 	Le Sale vengono identificate tramite: Numero sale (univoco all'interno del cinema), Cinema di appartenenza, Numero posti, Grandezza schermo (espresso in pollici) \\
 	 	\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -197,7 +208,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Cast"} \\
  		\hline
- 		Il Cast viene identificato tramite: Film, Lavoratore \\
+ 		Il Cast viene identificato tramite: Nome \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -206,7 +217,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Lavoratore"} \\
  		\hline
- 		I Lavoratori vengono identificati tramite: Id, Nome, Cognome, Data di nascita, indirizzo (composto da via, citta', provincia, codice postale, regione, nazione) \\
+ 		I Lavoratori vengono identificati tramite: Persona, Cast, Salario \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -251,7 +262,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite: Film, Data e ora proiezione, Cinema, Sala, Posto \\
+		I Biglietti vengono idetificati tramite: Persona, Spettacolo, Numero posto \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
