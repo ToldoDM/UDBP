@@ -55,7 +55,7 @@ CREATE TABLE Film (
 	Id INT auto_increment NOT NULL,
 	Titolo varchar(100) NOT NULL,
 	Anno INT(4) NOT NULL,
-	Durata TIMESTAMP NOT NULL,
+	Durata TIME NOT NULL,
 	Genere ENUM('Drammatico','Commedia','Azione','Avventura', 'Thriller', 'Horror') NOT NULL,
 	Trama varchar(10000) NOT NULL,
 	Id_Cast INT NOT NULL,
