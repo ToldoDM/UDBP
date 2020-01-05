@@ -4,7 +4,7 @@ CREATE TABLE Persona (
 	Nome varchar(100) NOT NULL,
 	Cognome varchar(100) NOT NULL,
 	Data_nascita DATE NOT NULL,
-	Sesso ENUM('M','F'),
+	Sesso ENUM('M','F') NOT NULL,
 	CONSTRAINT Persona_PK PRIMARY KEY (Id)
 )
 ENGINE=InnoDB;
@@ -95,7 +95,7 @@ CREATE TABLE Recensione (
 	Id_Film INT NOT NULL,
 	Id_Persona INT NOT NULL,
 	Commento varchar(10000) NULL,
-	Voto INT(1) NULL,
+	Voto INT(1) NOT NULL,
 	CONSTRAINT Recensione_PK PRIMARY KEY (Id_Film,Id_Persona),
 	CONSTRAINT Recensione_FK FOREIGN KEY (Id_Film) REFERENCES Film(Id),
 	CONSTRAINT Recensione_FK_1 FOREIGN KEY (Id_Persona) REFERENCES Persona(Id)
