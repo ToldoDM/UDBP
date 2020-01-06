@@ -324,17 +324,15 @@ INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (1,14,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (1,9,'commento',1);
+	VALUES (1,9,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (1,6,'commento',2);
-INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (1,1,'commento',3);
+	VALUES (1,6,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (2,3,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (2,2,'commento',3);
+	VALUES (2,2,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (2,5,'commento',5);
+	VALUES (2,5,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (2,7,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
@@ -350,21 +348,17 @@ INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (2,6,'commento',2);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (2,1,'commento',3);
-INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (3,3,'commento',5);
+	VALUES (3,3,'commento',1);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (3,2,'commento',3);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (3,5,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (3,7,'commento',4);
-INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (3,21,'commento',4);
+	VALUES (3,21,'commento',1);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (3,22,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (3,13,'commento',5);
+	VALUES (3,13,'commento',1);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (3,14,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
@@ -400,15 +394,15 @@ INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (5,2,'commento',3);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (5,5,'commento',5);
+	VALUES (5,5,'commento',2);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (5,7,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (5,21,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (5,22,'commento',4);
+	VALUES (5,22,'commento',2);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (5,13,'commento',5);
+	VALUES (5,13,'commento',2);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (5,14,'commento',5);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
@@ -430,11 +424,11 @@ INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (6,22,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (6,13,'commento',5);
+	VALUES (6,13,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (6,14,'commento',5);
+	VALUES (6,14,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
-	VALUES (6,9,'commento',1);
+	VALUES (6,9,'commento',4);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (6,6,'commento',2);
 INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
@@ -463,59 +457,64 @@ INSERT INTO Recensione (Id_Film,Id_Persona,Commento,Voto)
 	VALUES (7,1,'commento',3);
 
 --Popolamento Biglietto
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (1,23,1,1);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (2,24,11,2);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (3,25,12,3);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (4,26,17,4);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (5,27,19,5);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (6,28,10,6);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (7,29,21,7);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (8,30,21,8);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (9,31,25,9);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (10,32,30,10);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (11,33,31,11);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (12,34,33,12);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (13,35,45,13);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (14,36,50,14);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (15,37,47,15);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (16,38,42,16);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (17,39,41,17);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (18,40,21,18);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (19,41,11,19);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (20,42,31,20);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (21,43,41,21);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (22,44,37,22);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (23,45,48,23);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (24,46,11,24);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (25,47,11,25);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (26,48,11,26);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (27,49,11,27);
-INSERT INTO Biglietto (Id,n_posto,Id_Spettacolo,Id_Persona)
-	VALUES (28,50,11,28);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (6,1,9);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (11,1,1);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (11,5,1);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (5,11,2);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (7,12,3);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (21,17,4);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (22,19,5);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (13,10,6);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (14,21,7);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (30,21,8);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (31,25,9);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (32,30,10);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (33,31,11);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (34,33,12);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (35,45,13);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (36,50,14);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (37,47,15);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (38,42,16);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (39,41,17);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (40,21,18);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (41,11,19);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (42,31,20);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (43,41,21);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (44,37,22);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (45,48,23);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (46,11,24);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (47,11,25);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (48,11,26);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (49,11,27);
+INSERT INTO Biglietto (n_posto,Id_Spettacolo,Id_Persona)
+	VALUES (50,11,28);
+

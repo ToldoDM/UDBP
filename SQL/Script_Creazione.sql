@@ -80,11 +80,10 @@ ENGINE=InnoDB;
 
 --Biglietto
 CREATE TABLE Biglietto (
-	Id INT auto_increment NOT NULL,
-	n_posto INT(3) NOT NULL,
-	Id_Spettacolo INT NOT NULL,
 	Id_Persona INT NOT NULL,
-	CONSTRAINT Biglietto_PK PRIMARY KEY (Id),
+	Id_Spettacolo INT NOT NULL,
+	n_posto INT(3) NOT NULL,
+	CONSTRAINT Biglietto_PK PRIMARY KEY (Id_Persona,Id_Spettacolo),
 	CONSTRAINT Biglietto_FK FOREIGN KEY (Id_Spettacolo) REFERENCES Spettacolo(Id),
 	CONSTRAINT Biglietto_FK_1 FOREIGN KEY (Id_Persona) REFERENCES Persona(Id)
 )
@@ -113,3 +112,4 @@ CREATE TABLE Lavoratore (
 	CONSTRAINT Lavoratore_FK_1 FOREIGN KEY (Id_Cast) REFERENCES `Cast`(Id)
 )
 ENGINE=InnoDB;
+
