@@ -492,7 +492,7 @@
 	\section{Query e Indici}
 	\subsection{Query}
 	\paragraph{1}
-	Numero di recensioni non valide, per persona, che NON hanno visto il film		
+	Numero di recensioni di persone che non hanno visto il film, quindi di conseguenza non valide.		
 	\begin{lstlisting}[language=SQL]
 	SELECT p.Id, p.Nome, p.Cognome, COUNT(r.Id_Persona) AS 'N. Recensioni non valide'
 	FROM Recensione r JOIN Persona p ON (r.Id_Persona=p.Id) LEFT JOIN
@@ -514,7 +514,7 @@
 	+----+----------+-----------+--------------------------+	
 	\end{lstlisting}
 	\paragraph{2}
-	Voto medio per film in base alle recensioni valide
+	Voto medio per film in base alle recensioni valide.
 		\begin{lstlisting}[language=SQL]
 	SELECT sq.Titolo, AVG(r.Voto) AS 'Voto Medio'
 	FROM Recensione r JOIN
@@ -534,5 +534,5 @@
 	+-------------------+------------+
 	
 	\end{lstlisting}
-	voto medio a film in base alle recensioni valide, affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema, persone che hanno lasciato la recensione senza aver visto il film
+	 affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
 \end{document} 
