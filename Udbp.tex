@@ -6,8 +6,32 @@
 \usepackage[table]{xcolor}
 \usepackage{fontspec} 
 \usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{wrapfig}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                     
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,
+}
+\lstset{style=mystyle}
 \setmainfont{Arial}
-\graphicspath{ {./Schemas/} }
+\graphicspath{ {./} }
 
 \begin{document}
 	
@@ -432,7 +456,7 @@
 	\paragraph{Spettacolo}
 	Per identificare uno spettacolo bisognerebbe fare riferimento all'attributo \textit{dataora\_inizio} insieme alla \textit{sala} e al \textit{film}. Quindi per semplicita' viene aggiunto un nuovo attributo identificatore \textit{Id}, cio' semplifica e rende meno ambigua l'identificazione di una tupla all'interno di spettacolo.
 	\paragraph{Biglietto}
-	Per identificare il singolo biglietto si ricorre all'utilizzo di un identificatore \textit{Id}, questo per la stessa motivazione presente in \textit{Spettacolo}.
+	Per identificare il singolo biglietto si utilizza \textit{Persona e Spettacolo}, dato che la coppia ne identifica una tupla.
 	\paragraph{Film}
 	Per identificare un singolo film, bisognerebbe comprendere \textit{Titolo, Anno, Genere e Durata}, dato che potrebbe verificarsi l'uscita di un film omonimo nello stesso anno con lo stesso genere. Quindi per semplificare e rendere ancora piu' forte l'identificazione, viene introdotto l'attributo identificatore \textit{Id}.
 	\paragraph{Recensione}
@@ -446,7 +470,7 @@
 	\paragraph{Indirizzo}
 	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola tupla.
 	\subsubsection{Schema ER ristrutturato}	
-	\includegraphics[height=\textwidth, width=20cm, angle=90]{SchemaER_Rev}
+	\includegraphics[height=\textwidth, width=20cm, angle=90]{Schemas/SchemaER_Rev}
 	\subsection{Traduzione nel modello relazionale}
 	\textbf{Cinema}(\underline{Nome}, Id\_Indirizzo)\\
 	\textit{vincolo di integrita' referenziale tra "Id\_Indirizzo" ed "Id" in Indirizzo.}\\\\
@@ -454,7 +478,7 @@
 	\textit{Vincolo di integrita' referenziale tra "Nome\_Cinema" e "Nome" in Cinema.}\\\\
 	\textbf{Spettacolo}(\underline{Id}, Dataora\_inizio, 3D, Id\_Film, Num\_Sala, Nome\_Cinema)\\
 	\textit{Vincolo di integrita' referenziale tra "Id\_Film" ed "Id" in Film, "Num\_Sala" e "Numero" in Sala e tra "Nome\_Cinema" e "Cinema" in Sala.}\\\\
-	\textbf{Biglietto}(\underline{Id}, n\_posto, Id\_Spettacolo, Id\_Persona)\\
+	\textbf{Biglietto}(\underline{Id\_Spettacolo}, \underline{Id\_Persona}, n\_posto)\\
 	\textit{Vincolo di integrita' referenziale tra "Id\_Spettacolo" ed "Id" in Spettacolo e tra "Id\_Persona" e "Id" in Persona.}\\\\
 	\textbf{Film}(\underline{Id}, Titolo, Anno, Durata, Genere, Trama, Id\_Cast)\\
 	\textit{Vincolo di integrita' referenziale tra "Id\_Cast" e "Id" in Cast}.\\\\
@@ -466,5 +490,49 @@
 	\textbf{Cast}(\underline{Id}, Nome).\\\\
 	\textbf{Indirizzo}(\underline{Id}, Via, Citta, n\_civ, Stato, Cap)\\\\
 	\section{Query e Indici}
-	voto medio a film, affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema.
+	\subsection{Query}
+	\paragraph{1}
+	Numero di recensioni non valide, per persona, che NON hanno visto il film		
+	\begin{lstlisting}[language=SQL]
+	SELECT p.Id, p.Nome, p.Cognome, COUNT(r.Id_Persona) AS 'N. Recensioni non valide'
+	FROM Recensione r JOIN Persona p ON (r.Id_Persona=p.Id) LEFT JOIN
+		(SELECT f.Id AS Id_Film, b.Id_Persona AS Id_Persona
+		FROM Biglietto b, Spettacolo s, Film f
+		WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film ) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
+	WHERE sq.Id_Persona IS NULL
+	GROUP BY p.Id
+	
+	--Risultato Query
+	+----+----------+-----------+--------------------------+
+	| Id | Nome     | Cognome   | N. Recensioni non valide |
+	+----+----------+-----------+--------------------------+
+	|  1 | Mario    | Rossi     |                        4 |
+	|  2 | Matteo   | Verdi     |                        6 |
+	|  3 | Stefano  | Minto     |                        6 |
+	|  5 | Marco    | Zanetti   |                        7 |
+	| .. |     .... |     ...   |                       ...|
+	+----+----------+-----------+--------------------------+	
+	\end{lstlisting}
+	\paragraph{2}
+	Voto medio per film in base alle recensioni valide
+		\begin{lstlisting}[language=SQL]
+	SELECT sq.Titolo, AVG(r.Voto) AS 'Voto Medio'
+	FROM Recensione r JOIN
+		(SELECT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
+		FROM Biglietto b, Spettacolo s, Film f
+		WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film ) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
+	GROUP BY sq.Titolo
+	
+	--Risultato Query
+	+-------------------+------------+
+	| Titolo            | Voto Medio |
+	+-------------------+------------+
+	| Cinepanettone     |     3.5000 |
+	| Jumanji           |     1.6667 |
+	| Mediterraneo      |     4.0000 |
+	|                ...|        ... |
+	+-------------------+------------+
+	
+	\end{lstlisting}
+	voto medio a film in base alle recensioni valide, affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema, persone che hanno lasciato la recensione senza aver visto il film
 \end{document} 
