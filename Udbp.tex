@@ -101,7 +101,7 @@
 		\tableofcontents
 	\end{titlepage}
 	\section{Abstract}	
-	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario che desiderano. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, dato che il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori la propria opinione sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al cliente la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
+	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario che desiderano. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, dato che il biglietto e' nominativo a differenza di altri cinema. Ogni biglietto ha un prezzo fisso di 10 euro. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori la propria opinione sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al cliente la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
 	\section{Analisi dei requisiti}
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena D4C cinema.
@@ -622,8 +622,7 @@
 	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film
 	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
 	WHERE sq.Id_Persona IS NULL
-	GROUP BY p.Id
-	
+	GROUP BY p.Id	
 	--Risultato Query
 	+----+----------+-----------+--------------------------+
 	| Id | Nome     | Cognome   | N. Recensioni non valide |
@@ -642,8 +641,7 @@
 	FROM Biglietto b, Spettacolo s, Film f
 	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film
 	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
-	GROUP BY sq.Titolo
-	
+	GROUP BY sq.Titolo	
 	--Risultato Query
 	+-------------------+------------+
 	| Titolo            | Voto Medio |
@@ -655,13 +653,12 @@
 	+-------------------+------------+	
 	\end{lstlisting}
 	\paragraph{Query3}
-	Affluenza di persone per cinema
+	Affluenza di persone per cinema.
 	\begin{lstlisting}[language=SQL]
 	SELECT s.Nome_Cinema AS Cinema, COUNT(b.Id_Persona) AS Affluenza
 	FROM Biglietto b JOIN Spettacolo s ON (b.Id_Spettacolo=s.Id)
 	GROUP BY s.Nome_Cinema
-	ORDER by s.Nome_Cinema
-	
+	ORDER by s.Nome_Cinema	
 	--Risultato Query
 	+-------------+-----------+
 	| Cinema      | Affluenza |
@@ -673,23 +670,73 @@
 	+-------------+-----------+	
 	\end{lstlisting}
 	\paragraph{Query4}
-	Lista attore/sceneggiatore/produttore/regista piu pagato
+	Lista attore/sceneggiatore/produttore/regista piu' pagato.
 	\begin{lstlisting}[language=SQL]
-	SELECT sq.Id_Persona, p.Nome, p.Cognome, p.Sesso, sq.Ruolo, MAX(sq.Salario) AS Salario
+	SELECT sq.Id_Persona AS ID, p.Nome, p.Cognome, p.Sesso, sq.Ruolo, MAX(sq.Salario) AS Salario
 	FROM (SELECT Id_Persona, Ruolo, SUM(Salario) AS Salario
 	FROM Lavoratore l
 	GROUP BY Id_Persona, Ruolo) AS sq JOIN Persona p ON (p.Id=sq.Id_Persona)
-	GROUP BY sq.Ruolo
-	
+	GROUP BY sq.Ruolo	
 	--Risultato Query
-	+-------------+-----------+
-	| Cinema      | Affluenza |
-	+-------------+-----------+
-	| D4C Marcon  |        10 |
-	| D4C Mestre  |         4 |
-	| D4C Milano  |         4 |
-	|          ...|       ... |
-	+-------------+-----------+	
+	+----+-----------+----------+-------+---------------+---------+
+	| ID | Nome      | Cognome  | Sesso | Ruolo         | Salario |
+	+----+-----------+----------+-------+---------------+---------+
+	|  1 | Mario     | Rossi    | M     | Attore        |   25000 |
+	|  4 | Alessando | Rebeschi | M     | Regista       |   30000 |
+	|  8 | Enrico    | Marcato  | M     | Produttore    |   50000 |
+	|  4 | Alessando | Rebeschi | M     | Sceneggiatore |   15000 |
+	+----+-----------+----------+-------+---------------+---------+
+	
 	\end{lstlisting}
-	 lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
+	\paragraph{Query5}
+	
+	Lista film a cui ha partecipato uno specifico attore. \\\textit{In questo caso viene preso come esempio la persona con Id=21.}
+	\begin{lstlisting}[language=SQL]
+	SELECT f.Titolo, f.Anno, f.Durata, f.Genere
+	FROM Film f JOIN `Cast` c ON c.Id=f.Id_Cast JOIN Lavoratore l ON l.Id_Cast=c.Id
+	WHERE l.Ruolo='Attore' AND l.Id_Persona=21	
+	--Risultato Query
+	+-------------------+------+----------+----------+
+	| Titolo            | Anno | Durata   | Genere   |
+	+-------------------+------+----------+----------+
+	| Film Indie        | 2014 | 00:50:00 | Thriller |
+	| Storie Spaventose | 2010 | 00:50:00 | Horror   |
+	+-------------------+------+----------+----------+
+	
+	\end{lstlisting}
+	\paragraph{Query6}
+	Lista rapporto incasso a spettacolo
+	\begin{lstlisting}[language=SQL]
+	SELECT s.Id AS Spettacolo, s.Nome_Cinema AS Cinema, f.Titolo AS Titolo, COUNT(b.Id_Persona) AS Affluenza, COUNT(b.Id_Persona)*10 as Incasso
+	FROM Spettacolo s LEFT JOIN Biglietto b ON b.Id_Spettacolo=s.Id JOIN Film f ON f.Id=s.Id_Film
+	GROUP BY s.Id
+	ORDER BY Affluenza DESC
+	--Risultato Query
+	+------------+-------------+-------------------+-----------+---------+
+	| Spettacolo | Cinema      | Titolo            | Affluenza | Incasso |
+	+------------+-------------+-------------------+-----------+---------+
+	|         11 | D4C Marcon  | The Matrix        |         7 |      70 |
+	|         21 | D4C Silea   | The Matrix        |         3 |      30 |
+	|          1 | D4C Mestre  | The Matrix        |         2 |      20 |
+	|         41 | D4C Treviso | The Matrix        |         2 |      20 |
+	|        ... |          ...|                ...|       ... |     ... |
+	+------------+-------------+-------------------+-----------+---------+	
+	
+	\end{lstlisting}
+	\subsection{Indici}
+	\subsection{Studio caso d'uso}
+	Ipotizzando di avere il database con un'ampia quantita' di dati, si ipotizza che:
+	\begin{itemize}
+		\item La tabella \textbf{Spettacolo} contanga molte tuple
+		\item Nella tabella \textbf{Spettacolo} vengono aggiunti molto frequentemente nuove tuple
+		\item Che la stessa venga consultata spesso per l'orario inizio spettacoli
+		\item La tabella \textbf{Film} contenga molte tuple
+		\item Nella tabella \textbf{Film} non poche volte al mese vengano aggiunti nuovi film
+		\item Che la stessa viene consultata spesso per il titolo del film
+		\item La tabella \textbf{Persona} contanga molte tuple
+		\item Nella tabella \textbf{Persona} vengono aggiunti spesso nuove tuple
+		\item Che la stessa venga colsultata spesso per la ricerca di un film dove ha partecipato uno specifico attore, ricercandolo per cognome
+	\end{itemize}
+	\subsection{Riconoscimento tabelle da indicizzare}
+	\subsection{Implementazione dell'indice}
 \end{document}
