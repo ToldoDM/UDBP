@@ -4,7 +4,7 @@
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
 \usepackage[table]{xcolor}
-\usepackage{fontspec} 
+%\usepackage{fontspec} 
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -101,7 +101,7 @@
 		\tableofcontents
 	\end{titlepage}
 	\section{Abstract}	
-	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, perche' il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori informazioni sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al clinte la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
+	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario che desiderano. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, dato che il biglietto e' nominativo a differenza di altri cinema. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori la propria opinione sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al cliente la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
 	\section{Analisi dei requisiti}
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena D4C cinema.
@@ -126,7 +126,7 @@
 	    \item 3D
 	    \item Posti venduti
 	\end{itemize}
-	I clienti del cinema durante la scelta del film devono avere la possibilita' di consultare le informazioni dei vari \textbf{Film}, dati che servono anche per l'organizzazione degli spettacoli:
+	I clienti del cinema durante la scelta del film devono avere la possibilita' di consultare le informazioni dei vari \textbf{Film}, dati necessari anche per l'organizzazione degli spettacoli:
 	\begin{itemize}
 		\item Titolo
 		\item Durata
@@ -241,7 +241,25 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Lavoratore"} \\
  		\hline
- 		I Lavoratori vengono identificati tramite: Persona, Cast, Salario \\
+ 		I Lavoratori vengono identificati tramite: Salario \\
+ 		\hline 		
+ 	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Persona"} \\
+ 		\hline
+ 		Le Persone vengono identificate tramite: Codice Fiscale, Nome, Cognome, Data nascita \\
+ 		\hline 		
+ 	\end{tabular} 
+ 	\\\\\\
+ 	\begin{tabular} { |p{16.8cm}| }
+ 		\hline
+ 		\rowcolor{lightgray}
+ 		\textbf{Frasi relative a "Recensione"} \\
+ 		\hline
+ 		Le recensioni vengono identificati tramite: Id, Commento, Voto \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -250,7 +268,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Attore"} \\
  		\hline
- 		Persona che ha lavorato come attore nel film \\
+ 		Lavoratore che ha lavorato come attore nel film \\
  		\hline 		
  	\end{tabular} 
 	\\\\\\
@@ -259,7 +277,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Sceneggiatore"} \\
 		\hline
-		Persona che ha lavorato come sceneggiatore nel film \\
+		Lavoratore che ha lavorato come sceneggiatore nel film \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -268,7 +286,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Produttore"} \\
 		\hline
-		Persona che ha lavorato come produttore nel film \\
+		Lavoratore che ha lavorato come produttore nel film \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -277,7 +295,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Regista"} \\
 		\hline
-		Persona che ha lavorato come regista nel film \\
+		Lavoratore che ha lavorato come regista nel film \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -535,4 +553,4 @@
 	
 	\end{lstlisting}
 	 affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
-\end{document} 
+\end{document}
