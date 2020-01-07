@@ -214,8 +214,17 @@
 	 	\rowcolor{lightgray}
 	 	\textbf{Frasi relative a "Sala"} \\
 	 	\hline
-	 	Le Sale vengono identificate tramite: Numero sale (univoco all'interno del cinema), Cinema di appartenenza, Numero posti, Grandezza schermo (espresso in pollici) \\
+	 	Le Sale vengono identificate tramite: Numero sala (univoco all'interno del cinema), Numero posti, Grandezza schermo (espresso in pollici) \\
 	 	\hline 		
+	\end{tabular} 
+	\\\\\\
+	\begin{tabular} { |p{16.8cm}| }
+		\hline
+		\rowcolor{lightgray}
+		\textbf{Frasi relative a "Spettacolo"} \\
+		\hline
+		Lo spettacolo viene idetificato tramite: Data e ora inizio spettacolo, Se il film è 3D o no, posti venduti \\
+		\hline 		
 	\end{tabular} 
 	\\\\\\
 	\begin{tabular} { |p{16.8cm}| }
@@ -250,7 +259,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Persona"} \\
  		\hline
- 		Le Persone vengono identificate tramite: Codice Fiscale, Nome, Cognome, Data nascita \\
+ 		Le Persone vengono identificate tramite: Nome, Cognome, Data nascita e Sesso \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -259,7 +268,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Recensione"} \\
  		\hline
- 		Le recensioni vengono identificati tramite: Id, Commento, Voto \\
+ 		Le recensioni vengono identificati tramite: Commento e Voto \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -304,18 +313,11 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite: Persona, Spettacolo, Numero posto \\
+		I Biglietti vengono idetificati tramite Numero posto \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
-	\begin{tabular} { |p{16.8cm}| }
-		\hline
-		\rowcolor{lightgray}
-		\textbf{Frasi relative a "Programmazione"} \\
-		\hline
-		La Programmazione viene idetificata tramite: Cinema, Sala, Film, Data e ora proiezione \\
-		\hline 		
-	\end{tabular} 
+	
 	
 	\section{Progettazione Concettuale}	
 	\subsection{Lista delle entita'}
@@ -336,32 +338,64 @@
 		\end{itemize}
 		\item \textbf{Sala}: Rappresenta una sala di un cinema.
 		\begin{itemize}
-			\item \underline{Sala: \textit{int}}
-			\item \underline{Cinema: \textit{string}}
-			\item Numero\_posti: \textit{int}
+		    \item Numero: \textit{int}
+			\item Capienza: \textit{int}
 			\item Grandezza\_schermo: \textit{int}
+		\end{itemize}
+		\item \textbf{Spettacolo}: Rappresenta dati per la Programmazione.
+		\begin{itemize}
+			\item Data\_Ora\_Inizio: \textit{timestamp}
+			\item 3D: \textit{int}
+			\item Posti\_Venduti: \textit{int}
+		\end{itemize}
+		\item \textbf{Biglietto}: Rappresenta il biglietto venduto.
+		\begin{itemize}
+			\item {N.Posto: \textit{int}}
 		\end{itemize}
 		\item \textbf{Film}: Rappresenta un film.
 		\begin{itemize}
-			\item \underline{Titolo: \textit{string}}
-			\item \underline{Anno: \textit{int}}
+			\item Titolo: \textit{string}
+			\item Anno: \textit{int}
 			\item Durata: \textit{timestamp}
 			\item Genere: \textit{string}
 			\item Trama: \textit{string}
 		\end{itemize}
-		\item \textbf{Lavoratore}: Rappresenta una persona che ha preso parte alla realizzazione di almeno un film.
+		\item \textbf{Cast}: Rappresenta il nome del cast.
 		\begin{itemize}
-			\item \underline{Id: \textit{int} univoco}
+			\item Nome: \textit{string}
+		\end{itemize}
+		\item \textbf{Lavoratore}: Rappresenta una persona partecipante nel cast.
+		\begin{itemize}
+			\item Salario: \textit{int}
+		\end{itemize}
+		\item \textbf{Attore}: Specializzazione di Lavoratore
+		\begin{itemize}
+			\item Nessun Attributo
+		\end{itemize}
+		\item \textbf{Produttore}: Specializzazione di Lavoratore
+		\begin{itemize}
+			\item Nessun Attributo
+		\end{itemize}
+		\item \textbf{Sceneggiatore}: Specializzazione di Lavoratore
+		\begin{itemize}
+			\item Nessun Attributo
+		\end{itemize}
+		\item \textbf{Regista}: Specializzazione di Lavoratore
+		\begin{itemize}
+			\item Nessun Attributo
+		\end{itemize}
+		\item \textbf{Persona}: Rappresenta una persona che acquista i biglietti o fà parte della produzione del film
+		\begin{itemize}
 			\item Nome: \textit{string}
 			\item Cognome: \textit{string}
-			\item Data\_di\_nascita: \textit{datetime}			
-			\item Indirizzo: attributo composto, possibile \textit{null}
-				\subitem Via: \textit{string}
-				\subitem Citta': \textit{string}
-				\subitem Provincia: \textit{string}
-				\subitem CAP: \textit{int}
-				\subitem Regione: \textit{string}
-				\subitem Nazione: \textit{string}
+			\item Data\_di\_nascita: \textit{datetime}	
+			\item Sesso: \textit{string}
+		\end{itemize}
+		\item \textbf{Recensione}: Rappresenta la recensione di un film da parte di una persona.
+		\begin{itemize}
+			\item \underline{Id: \textit{string}}
+			\item Commento: \textit{string}
+			\item Voto: \textit{int}
 		\end{itemize}
 	\end{itemize}
 	\section{Progettazione logica}
