@@ -214,7 +214,7 @@
 	 	\rowcolor{lightgray}
 	 	\textbf{Frasi relative a "Sala"} \\
 	 	\hline
-	 	Le Sale vengono identificate tramite: Numero sala (univoco all'interno del cinema), Numero posti, Grandezza schermo (espresso in pollici) \\
+	 	Le Sale vengono identificate tramite: Numero sala (univoco all'interno del cinema), Cinema di appartenenza, Numero posti, Grandezza schermo (espresso in pollici) \\
 	 	\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -268,7 +268,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Recensione"} \\
  		\hline
- 		Le recensioni vengono identificati tramite: Commento e Voto \\
+ 		Le recensioni vengono identificati tramite: Persona, Film, Commento, Voto \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -313,7 +313,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite Numero posto \\
+		I Biglietti vengono idetificati tramite: Numero posto \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -322,12 +322,10 @@
 	\section{Progettazione Concettuale}	
 	\subsection{Lista delle entita'}
 	Di seguito veranno riportate le classi che verranno contenute nel database, tutti i campi sono \textbf{not null} tranne quelli specificati.\\
-	\underline{Gli identificatori delle entita' sono sottolineati.}
 	\begin{itemize}
 		\item \textbf{Cinema}: Rappresenta un cinema.
 		\begin{itemize}
-			\item \underline{Nome: \textit{string} univoco}
-			\item Numero sale: \textit{int}
+			\item Nome: \textit{string} univoco
 			\item Indirizzo: attributo composto
 				\subitem Via: \textit{string}
 				\subitem Citta': \textit{string}
@@ -339,24 +337,25 @@
 		\item \textbf{Sala}: Rappresenta una sala di un cinema.
 		\begin{itemize}
 		    \item Numero: \textit{int}
+		    \item Cinema: \textit{int}
 			\item Capienza: \textit{int}
 			\item Grandezza\_schermo: \textit{int}
 		\end{itemize}
 		\item \textbf{Spettacolo}: Rappresenta dati per la Programmazione.
 		\begin{itemize}
-			\item Data\_Ora\_Inizio: \textit{timestamp}
-			\item 3D: \textit{int}
+			\item DataOra\_Inizio: \textit{timestamp}
+			\item 3D: \textit{bool}
 			\item Posti\_Venduti: \textit{int}
 		\end{itemize}
 		\item \textbf{Biglietto}: Rappresenta il biglietto venduto.
 		\begin{itemize}
-			\item {N.Posto: \textit{int}}
+			\item N\_Posto: \textit{int}
 		\end{itemize}
 		\item \textbf{Film}: Rappresenta un film.
 		\begin{itemize}
 			\item Titolo: \textit{string}
 			\item Anno: \textit{int}
-			\item Durata: \textit{timestamp}
+			\item Durata: \textit{time}
 			\item Genere: \textit{string}
 			\item Trama: \textit{string}
 		\end{itemize}
@@ -366,6 +365,8 @@
 		\end{itemize}
 		\item \textbf{Lavoratore}: Rappresenta una persona partecipante nel cast.
 		\begin{itemize}
+			\item Persona: \textit{int}
+			\item Cast: \textit{int}
 			\item Salario: \textit{int}
 		\end{itemize}
 		\item \textbf{Attore}: Specializzazione di Lavoratore
@@ -384,7 +385,7 @@
 		\begin{itemize}
 			\item Nessun Attributo
 		\end{itemize}
-		\item \textbf{Persona}: Rappresenta una persona che acquista i biglietti o fà parte della produzione del film
+		\item \textbf{Persona}: Rappresenta una persona che acquista i biglietti e/o fà parte della produzione del film
 		\begin{itemize}
 			\item Nome: \textit{string}
 			\item Cognome: \textit{string}
@@ -393,8 +394,9 @@
 		\end{itemize}
 		\item \textbf{Recensione}: Rappresenta la recensione di un film da parte di una persona.
 		\begin{itemize}
-			\item \underline{Id: \textit{string}}
-			\item Commento: \textit{string}
+			\item Persona: \textit{int}
+			\item Film: \textit{int}
+			\item Commento: \textit{string}, possibilita' di null se la persona non rilascia un commento
 			\item Voto: \textit{int}
 		\end{itemize}
 	\end{itemize}
