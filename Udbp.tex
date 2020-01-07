@@ -4,7 +4,7 @@
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
 \usepackage[table]{xcolor}
-%\usepackage{fontspec} 
+\usepackage{fontspec} 
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -241,7 +241,7 @@
  		\rowcolor{lightgray}
  		\textbf{Frasi relative a "Lavoratore"} \\
  		\hline
- 		I Lavoratori vengono identificati tramite: Salario \\
+ 		I Lavoratori vengono identificati tramite: Persona, Cast, Salario \\
  		\hline 		
  	\end{tabular} 
  	\\\\\\
@@ -513,10 +513,10 @@
 	Numero di recensioni di persone che non hanno visto il film, quindi di conseguenza non valide.		
 	\begin{lstlisting}[language=SQL]
 	SELECT p.Id, p.Nome, p.Cognome, COUNT(r.Id_Persona) AS 'N. Recensioni non valide'
-	FROM Recensione r JOIN Persona p ON (r.Id_Persona=p.Id) LEFT JOIN
-		(SELECT f.Id AS Id_Film, b.Id_Persona AS Id_Persona
-		FROM Biglietto b, Spettacolo s, Film f
-		WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film ) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
+	FROM Recensione r JOIN Persona p ON (r.Id_Persona=p.Id) LEFT JOIN (SELECT DISTINCT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
+	FROM Biglietto b, Spettacolo s, Film f
+	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film;
+	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
 	WHERE sq.Id_Persona IS NULL
 	GROUP BY p.Id
 	
@@ -527,7 +527,7 @@
 	|  1 | Mario    | Rossi     |                        4 |
 	|  2 | Matteo   | Verdi     |                        6 |
 	|  3 | Stefano  | Minto     |                        6 |
-	|  5 | Marco    | Zanetti   |                        7 |
+	|  5 | Marco    | Zanetti   |                        6 |
 	| .. |     .... |     ...   |                       ...|
 	+----+----------+-----------+--------------------------+	
 	\end{lstlisting}
@@ -535,10 +535,10 @@
 	Voto medio per film in base alle recensioni valide.
 		\begin{lstlisting}[language=SQL]
 	SELECT sq.Titolo, AVG(r.Voto) AS 'Voto Medio'
-	FROM Recensione r JOIN
-		(SELECT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
-		FROM Biglietto b, Spettacolo s, Film f
-		WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film ) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
+	FROM Recensione r JOIN (SELECT DISTINCT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
+	FROM Biglietto b, Spettacolo s, Film f
+	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film;
+	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
 	GROUP BY sq.Titolo
 	
 	--Risultato Query
@@ -549,8 +549,7 @@
 	| Jumanji           |     1.6667 |
 	| Mediterraneo      |     4.0000 |
 	|                ...|        ... |
-	+-------------------+------------+
-	
+	+-------------------+------------+	
 	\end{lstlisting}
 	 affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
 \end{document}
