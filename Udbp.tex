@@ -400,6 +400,8 @@
 			\item Voto: \textit{int}
 		\end{itemize}
 	\end{itemize}
+	\subsection{Schema ER}	
+	\includegraphics[height=\textwidth, width=20cm, angle=90]{Schemas/SchemaER}
 	\section{Progettazione logica}
 	\subsection{Analisi ridondanza}	
 	Una ridondanza si trova nell'entita' \textbf{Spettacolo}, nella quale l'attributo \textbf{posti\_venduti} si puo' calcolare visitando la relazione \textbf{Spettacolo-Biglietto} (chiamata "fa riferimento") e contando le occorrenze di tale relazione.
@@ -545,13 +547,13 @@
 	\textbf{Indirizzo}(\underline{Id}, Via, Citta, n\_civ, Stato, Cap)\\\\
 	\section{Query e Indici}
 	\subsection{Query}
-	\paragraph{1}
+	\paragraph{Query1}
 	Numero di recensioni di persone che non hanno visto il film, quindi di conseguenza non valide.		
 	\begin{lstlisting}[language=SQL]
 	SELECT p.Id, p.Nome, p.Cognome, COUNT(r.Id_Persona) AS 'N. Recensioni non valide'
 	FROM Recensione r JOIN Persona p ON (r.Id_Persona=p.Id) LEFT JOIN (SELECT DISTINCT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
 	FROM Biglietto b, Spettacolo s, Film f
-	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film;
+	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film
 	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
 	WHERE sq.Id_Persona IS NULL
 	GROUP BY p.Id
@@ -563,17 +565,16 @@
 	|  1 | Mario    | Rossi     |                        4 |
 	|  2 | Matteo   | Verdi     |                        6 |
 	|  3 | Stefano  | Minto     |                        6 |
-	|  5 | Marco    | Zanetti   |                        6 |
 	| .. |     .... |     ...   |                       ...|
 	+----+----------+-----------+--------------------------+	
 	\end{lstlisting}
-	\paragraph{2}
+	\paragraph{Query2}
 	Voto medio per film in base alle recensioni valide.
-		\begin{lstlisting}[language=SQL]
+	\begin{lstlisting}[language=SQL]
 	SELECT sq.Titolo, AVG(r.Voto) AS 'Voto Medio'
 	FROM Recensione r JOIN (SELECT DISTINCT f.Id AS Id_Film, b.Id_Persona AS Id_Persona, f.Titolo as Titolo
 	FROM Biglietto b, Spettacolo s, Film f
-	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film;
+	WHERE  s.Id=b.Id_Spettacolo AND f.Id=s.Id_Film
 	) sq ON (r.Id_Persona= sq.Id_persona AND r.Id_Film=sq.Id_Film)
 	GROUP BY sq.Titolo
 	
@@ -587,5 +588,42 @@
 	|                ...|        ... |
 	+-------------------+------------+	
 	\end{lstlisting}
-	 affluenza per cinema, attore maggiori pagamenti, lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
+	\paragraph{Query3}
+	Affluenza di persone per cinema
+	\begin{lstlisting}[language=SQL]
+	SELECT s.Nome_Cinema AS Cinema, COUNT(b.Id_Persona) AS Affluenza
+	FROM Biglietto b JOIN Spettacolo s ON (b.Id_Spettacolo=s.Id)
+	GROUP BY s.Nome_Cinema
+	ORDER by s.Nome_Cinema
+	
+	--Risultato Query
+	+-------------+-----------+
+	| Cinema      | Affluenza |
+	+-------------+-----------+
+	| D4C Marcon  |        10 |
+	| D4C Mestre  |         4 |
+	| D4C Milano  |         4 |
+	|          ...|       ... |
+	+-------------+-----------+	
+	\end{lstlisting}
+	\paragraph{Query4}
+	Lista attore/sceneggiatore/produttore/regista piu pagato
+	\begin{lstlisting}[language=SQL]
+	SELECT sq.Id_Persona, p.Nome, p.Cognome, p.Sesso, sq.Ruolo, MAX(sq.Salario) AS Salario
+	FROM (SELECT Id_Persona, Ruolo, SUM(Salario) AS Salario
+	FROM Lavoratore l
+	GROUP BY Id_Persona, Ruolo) AS sq JOIN Persona p ON (p.Id=sq.Id_Persona)
+	GROUP BY sq.Ruolo
+	
+	--Risultato Query
+	+-------------+-----------+
+	| Cinema      | Affluenza |
+	+-------------+-----------+
+	| D4C Marcon  |        10 |
+	| D4C Mestre  |         4 |
+	| D4C Milano  |         4 |
+	|          ...|       ... |
+	+-------------+-----------+	
+	\end{lstlisting}
+	 lista di film per attori, biglietti venduti con uno specifico attore, rapporto incasso per spettacolo a cinema
 \end{document}
