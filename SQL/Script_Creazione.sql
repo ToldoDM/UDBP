@@ -1,4 +1,5 @@
 --Persona
+DROP TABLE IF EXISTS Persona;
 CREATE TABLE Persona (
 	Id INT auto_increment NOT NULL,
 	Nome varchar(100) NOT NULL,
@@ -11,6 +12,7 @@ ENGINE=InnoDB;
 
 
 --Cast
+DROP TABLE IF EXISTS `Cast`;
 CREATE TABLE `Cast` (
 	Id INT auto_increment NOT NULL,
 	Nome varchar(100) NOT NULL,
@@ -19,6 +21,7 @@ CREATE TABLE `Cast` (
 ENGINE=InnoDB;
 
 --Indirizzo
+DROP TABLE IF EXISTS Indirizzo;
 CREATE TABLE Indirizzo (
 	Id INT auto_increment NOT NULL,
 	Via varchar(100) NOT NULL,
@@ -31,6 +34,7 @@ CREATE TABLE Indirizzo (
 ENGINE=InnoDB;
 
 --Cinema
+DROP TABLE IF EXISTS Cinema;
 CREATE TABLE Cinema (
 	Nome varchar(100) NOT NULL,
 	Id_Indirizzo INT NOT NULL,
@@ -40,6 +44,7 @@ CREATE TABLE Cinema (
 ENGINE=InnoDB;
 
 --Sala
+DROP TABLE IF EXISTS Sala;
 CREATE TABLE Sala (
 	Numero INT NOT NULL,
 	Nome_Cinema varchar(100) NOT NULL,
@@ -51,6 +56,7 @@ CREATE TABLE Sala (
 ENGINE=InnoDB;
 
 --Film
+DROP TABLE IF EXISTS Film;
 CREATE TABLE Film (
 	Id INT auto_increment NOT NULL,
 	Titolo varchar(100) NOT NULL,
@@ -65,6 +71,7 @@ CREATE TABLE Film (
 ENGINE=InnoDB;
 
 --Spettacolo
+DROP TABLE IF EXISTS Spettacolo;
 CREATE TABLE Spettacolo (
 	Id INT auto_increment NOT NULL,
 	Dataora_inizio DATETIME NOT NULL,
@@ -79,6 +86,7 @@ CREATE TABLE Spettacolo (
 ENGINE=InnoDB;
 
 --Biglietto
+DROP TABLE IF EXISTS Biglietto;
 CREATE TABLE Biglietto (
 	Id_Persona INT NOT NULL,
 	Id_Spettacolo INT NOT NULL,
@@ -90,6 +98,7 @@ CREATE TABLE Biglietto (
 ENGINE=InnoDB;
 
 --Recensione
+DROP TABLE IF EXISTS Recensione;
 CREATE TABLE Recensione (
 	Id_Film INT NOT NULL,
 	Id_Persona INT NOT NULL,
@@ -102,6 +111,7 @@ CREATE TABLE Recensione (
 ENGINE=InnoDB;
 
 --Lavoratore
+DROP TABLE IF EXISTS Lavoratore;
 CREATE TABLE Lavoratore (
 	Id_Persona INT NOT NULL,
 	Id_Cast INT NOT NULL,
@@ -112,4 +122,5 @@ CREATE TABLE Lavoratore (
 	CONSTRAINT Lavoratore_FK_1 FOREIGN KEY (Id_Cast) REFERENCES `Cast`(Id)
 )
 ENGINE=InnoDB;
+
 
