@@ -101,7 +101,8 @@
 		\tableofcontents
 	\end{titlepage}
 	\section{Abstract}	
-	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 150 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario che desiderano. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, dato che il biglietto e' nominativo a differenza di altri cinema. Ogni biglietto ha un prezzo fisso di 10 euro. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto cosi' da lasciare ai futuri spettatori la propria opinione sul film. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al cliente la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
+	La societa' D4C Cinemas e' una catena di cinema, nata in regno unito nel 1988 da una partnership tra Universal Studios e Paramount Pictures che nel corso degli anni si e' estesa sia nel campo nazionale, che nel campo internazionale. \\
+	Si vuole gestire la base di dati del cinema, comprendente la gestione di piu' cinema contemporaneamente. Ogni cinema e' un multisala contenente dalle 5 alle 10 sale ed ogni sala ha dai 50 ai 250 posti. D4C Cinemas rilascia giornalmente la programmazione degli spettacoli in modo tale da dare ai clienti varia scelta per l'orario che desiderano. Una persona per acquistare un biglietto deve recarsi alla biglietteria e al momento dell'acquisto comunicare le credenziali, dato che il biglietto e' nominativo a differenza di altri cinema. Ogni biglietto ha un prezzo fisso di 10 euro. Altra caratteristica di questa catena e' che al momento dell'uscita dalla sala lo spettatore puo' lasciare una recensione a caldo del film appena visto, cosi' da lasciare ai futuri spettatori la propria opinione. Altra cosa che viene effettuata in questa catena e' l'aggiunta e il tracciamento dei cast presenti, in modo tale da dare al cliente la possibilita' di avere la lista di film in cui recita il proprio attore/regista/sceneggiatore/produttore preferito.
 	\section{Analisi dei requisiti}
 	
 	Il progetto vuole rappresentare una base di dati che permetta di gestire la programmazione dei film della catena D4C cinema.
@@ -337,7 +338,7 @@
 		\item \textbf{Sala}: Rappresenta una sala di un cinema.
 		\begin{itemize}
 		    \item Numero: \textit{int}
-		    \item Cinema: \textit{int}
+		    \item Cinema: \textit{string}
 			\item Capienza: \textit{int}
 			\item Grandezza\_schermo: \textit{int}
 		\end{itemize}
@@ -365,8 +366,6 @@
 		\end{itemize}
 		\item \textbf{Lavoratore}: Rappresenta una persona partecipante nel cast.
 		\begin{itemize}
-			\item Persona: \textit{int}
-			\item Cast: \textit{int}
 			\item Salario: \textit{int}
 		\end{itemize}
 		\item \textbf{Attore}: Specializzazione di Lavoratore
@@ -394,8 +393,6 @@
 		\end{itemize}
 		\item \textbf{Recensione}: Rappresenta la recensione di un film da parte di una persona.
 		\begin{itemize}
-			\item Persona: \textit{int}
-			\item Film: \textit{int}
 			\item Commento: \textit{string}, possibilita' di null se la persona non rilascia un commento
 			\item Voto: \textit{int}
 		\end{itemize}
@@ -542,7 +539,10 @@
 		\end{tabular}
 		\begin{itemize}
 			\item Costi 2*2500 = 10000 accessi 
-		\end{itemize}
+		\end{itemize}	
+	\end{table}
+	\begin{table}[h!]
+		\centering
 		\caption{\textbf{Operazione 6 senza ridondanza}} \label{tab:Op6 w/o ridondanza}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
@@ -564,7 +564,7 @@
 	\subsubsection{Eliminazione generalizzioni}
 	\paragraph{Persona}
 	La generalizzaione \textit{Persona}, rappresenta una persona che e' un cliente del cinema, ha come figlia l'entita' \textit{Lavoratore}, che in questo caso viene considerato come il lavoratore che prende parte alla realizzazione di un film.\\
-	Essendo una generalizzazione parziale, si e' deciso di dividere le due entita' e creare una associazione uno a uno tra le due. Questo perche' ci sono occorrenze che riferiscono singolarmente con l'entita' figlia Lavoratore.\\
+	Essendo una generalizzazione parziale, si e' deciso di dividere le due entita' e creare una associazione tra le due. Questo perche' ci sono occorrenze che riferiscono singolarmente con l'entita' figlia Lavoratore.
 	\paragraph{Lavoratore}
 	A sua volta la generalizzazione di \textit{Lavoratore} ha quattro entita' figlie: \textit{Attore}, \textit{Sceneggiatore}, \textit{Produttore} e \textit{Regista}.\\
 	Essendo in questo caso una generalizzazione completa, e non essendoci associazioni dirette con le entita' figlie, si e' deciso di accorpare le entita' figlie all'interno dell'entita' \textit{Lavoratore}, aggiungendone un nuovo attributo \textit{Ruolo}, il quale ha lo scopo di identificare i vari ruoli svolti dal lavoratore.
@@ -592,7 +592,7 @@
 	\paragraph{Indirizzo}
 	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola tupla.
 	\subsubsection{Schema ER ristrutturato}	
-	\includegraphics[width=\textwidth, height=16.1cm]{Schemas/SchemaER_Rev}
+	\includegraphics[width=\textwidth, height=13cm]{Schemas/SchemaER_Rev}
 	\subsection{Traduzione nel modello relazionale}
 	\textbf{Cinema}(\underline{Nome}, Id\_Indirizzo)\\
 	\textit{vincolo di integrita' referenziale tra "Id\_Indirizzo" ed "Id" in Indirizzo.}\\\\
@@ -633,6 +633,7 @@
 	| .. |     .... |     ...   |                       ...|
 	+----+----------+-----------+--------------------------+	
 	\end{lstlisting}
+	\pagebreak
 	\paragraph{Query2}
 	Voto medio per film in base alle recensioni valide.
 	\begin{lstlisting}[language=SQL]
@@ -724,19 +725,30 @@
 	
 	\end{lstlisting}
 	\subsection{Indici}
-	\subsection{Studio caso d'uso}
+	\subsubsection{Studio caso d'uso}
 	Ipotizzando di avere il database con un'ampia quantita' di dati, si ipotizza che:
 	\begin{itemize}
 		\item La tabella \textbf{Spettacolo} contanga molte tuple
 		\item Nella tabella \textbf{Spettacolo} vengono aggiunti molto frequentemente nuove tuple
-		\item Che la stessa venga consultata spesso per l'orario inizio spettacoli
+		\item La stessa viene consultata spesso per l'orario inizio spettacoli
 		\item La tabella \textbf{Film} contenga molte tuple
 		\item Nella tabella \textbf{Film} non poche volte al mese vengano aggiunti nuovi film
-		\item Che la stessa viene consultata spesso per il titolo del film
+		\item La stessa viene consultata spesso per il titolo del film
 		\item La tabella \textbf{Persona} contanga molte tuple
 		\item Nella tabella \textbf{Persona} vengono aggiunti spesso nuove tuple
-		\item Che la stessa venga colsultata spesso per la ricerca di un film dove ha partecipato uno specifico attore, ricercandolo per cognome
+		\item La stessa viene colsultata spesso per la ricerca di un film tramite attore, ricercandolo per cognome
 	\end{itemize}
-	\subsection{Riconoscimento tabelle da indicizzare}
-	\subsection{Implementazione dell'indice}
+	\subsubsection{Riconoscimento tabelle da indicizzare}
+	\begin{itemize}
+		\item \textbf{Spettacolo}
+		\item \textbf{Film}
+		\item \textbf{Persona}
+	\end{itemize}
+	\subsubsection{Implementazione dell'indice}
+	\begin{lstlisting}[language=SQL]
+	CREATE INDEX idx_OrarioSpettacoli ON Spettacolo (Dataora_inizio);
+	CREATE INDEX idx_TitoloFilm ON Film (Titolo);
+	CREATE INDEX idx_CognomePersona ON Persona (Cognome);
+	
+	\end{lstlisting}
 \end{document}
