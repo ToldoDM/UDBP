@@ -30,7 +30,7 @@
 	showtabs=false,
 }
 \lstset{style=mystyle}
-%\setmainfont{Arial}
+\setmainfont{Arial}
 \graphicspath{ {./} }
 
 \begin{document}
@@ -405,60 +405,69 @@
 	\begin{itemize}
 	    \item {\textbf{Cinema-Sala: \underline{Appartiene}}
 		    \begin{itemize}
-			    \item Ogni cinema può avere N sale (1,N)
-			    \item Ogni sala può appartenere a un cinema (1,1)
+			    \item Ogni cinema può avere diverse sale
+			    \item Ogni sala può appartenere solo ad un cinema
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}
 		    
 		\item {\textbf{Sala-Spettacolo: \underline{Assegnata}}
 		    \begin{itemize}
-			    \item Ogni sala può aver assegnata N spettacoli (1,N)
-			    \item Ogni spettacolo a un certo orario può essere proiettato in una data Sala (1,1)
+			    \item Ogni sala può aver assegnati diversi spettacoli
+			    \item Ogni spettacolo e' proiettato in una sala
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}
 		        
 		\item {\textbf{Spettacolo-Film: \underline{Assegnato}}
 		    \begin{itemize}
-			    \item Ogni Spettacolo può riprodurre solo un Film (1,1)
-			    \item Un film può essere utilizzato per N Spettacoli (1,N)
+			    \item Ogni Spettacolo riproduce un solo Film
+			    \item Un film può essere utilizzato per diversi Spettacoli 
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}
 		    
 		\item {\textbf{Film-Cast: \underline{Lavora}}
 		    \begin{itemize}
-			    \item Ogni Cast può Lavorare su N film (1,N)
-			    \item Un film può avere solo 1 cast (1,1)
+			    \item Ogni Cast può Lavorare a molti Film
+			    \item Un film può avere solo un cast 
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}
 		
 		\item {\textbf{Cast-Lavoratore: \underline{Partecipa}}
 		    \begin{itemize}
-			    \item Ogni Lavoratore può lavorare in N cast (1,N)
-			    \item Un cast Possiede un Lavoratore per ogni nome (1,1)
+			    \item Ad un Cast partecipano diversi lavoratori
+			    \item Un lavoratore e' assegnato ad un cast con uno specifico ruolo
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}
 		  
 		\item {\textbf{Persona-Recensione: \underline{Rilascia}}
 		    \begin{itemize}
-			    \item Ogni Persona può scrivere N Recensioni N volte (0,N)
-			    \item Ogni Recensione può essere scritta da una sola persona (1,1)
+			    \item Ogni Persona può scrivere diverse Recensioni 
+			    \item Ogni Recensione e' scritta da una sola persona 
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}  
 		    
 		\item {\textbf{Recensione-Film: \underline{Ottiene}}
 		    \begin{itemize}
-			    \item  Ogni Recensione riguarda un solo film (1,1)
-			    \item  Qualsivoglia Film può ricevere N recensioni diverse (0,N)
+			    \item  Ogni Recensione riguarda un solo film
+			    \item  Qualsivoglia Film può ricevere diverse recensioni da parte delle persone 			    
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}  
 		    
 		\item {\textbf{Persona-Biglietto: \underline{Compra}}
 		    \begin{itemize}
-			    \item  Qualsivoglia persona può comprare N biglietti (0,N)
-			    \item  Ogni biglietto è intestato a una persona (1,1)
+			    \item  Ogni persona può comprare biglietti per vari film
+			    \item  Ogni biglietto è intestato ad una sola persona
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}  
 		
 		\item {\textbf{Biglietto-Spettacolo: \underline{Fà riferimento}}
 		    \begin{itemize}
-			    \item  Un biglietto fà riferimento a un solo spettacolo (1,1)
-			    \item  Per Qualsivoglia Film si possono comprare N biglietti (0,N)
+			    \item  Un biglietto fà riferimento ad un solo spettacolo
+			    \item  Per ogni spettacolo vengono comprati diversi biglietti
+			    \item Associazione di tipo (1,N) uno a molti
 		    \end{itemize}}		 
     \end{itemize}
 	\subsection{Schema ER}	
-	\includegraphics[height=\textwidth, width=20cm, angle=90]{Schemas/SchemaER}
+	\includegraphics[width=\textwidth, height=16.1cm]{Schemas/SchemaER}
 	\section{Progettazione logica}
 	\subsection{Analisi ridondanza}	
 	Una ridondanza si trova nell'entita' \textbf{Spettacolo}, nella quale l'attributo \textbf{posti\_venduti} si puo' calcolare visitando la relazione \textbf{Spettacolo-Biglietto} (chiamata "fa riferimento") e contando le occorrenze di tale relazione.
@@ -583,7 +592,7 @@
 	\paragraph{Indirizzo}
 	Per identificare un indirizzo si ricorre all'utilizzo di un identificatore \textit{Id}, questo per minimizzare l'utilizzo di attributi per il riconoscimento della singola tupla.
 	\subsubsection{Schema ER ristrutturato}	
-	\includegraphics[height=\textwidth, width=20cm, angle=90]{Schemas/SchemaER_Rev}
+	\includegraphics[width=\textwidth, height=16.1cm]{Schemas/SchemaER_Rev}
 	\subsection{Traduzione nel modello relazionale}
 	\textbf{Cinema}(\underline{Nome}, Id\_Indirizzo)\\
 	\textit{vincolo di integrita' referenziale tra "Id\_Indirizzo" ed "Id" in Indirizzo.}\\\\
