@@ -123,6 +123,7 @@
 	\begin{itemize}
 		\item Film
 		\item Sala di proiezione
+		\item Cinema
 	    \item Data ora film
 	    \item 3D
 	    \item Posti venduti
@@ -165,7 +166,7 @@
 		\item Spettacolo
 		\item Numero posto
 	\end{itemize}
-	Qualsiasi persona potrà inoltre rilasciare una {\bf Recensione} inerente al film appnea visto. L'entità recensione conterrà:
+	Qualsiasi persona potrà inoltre rilasciare una {\bf Recensione} inerente al film appena visto. L'entità recensione conterrà:
 	\begin{itemize}
 		\item Persona
 		\item Film
@@ -224,7 +225,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Spettacolo"} \\
 		\hline
-		Lo spettacolo viene idetificato tramite: Data e ora inizio spettacolo, Se il film è 3D o no, posti venduti \\
+		Lo spettacolo viene idetificato tramite: Film, Sala, Cinema, Data e ora inizio spettacolo, Se il film è 3D, posti venduti \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -314,7 +315,7 @@
 		\rowcolor{lightgray}
 		\textbf{Frasi relative a "Biglietto"} \\
 		\hline
-		I Biglietti vengono idetificati tramite: Numero posto \\
+		I Biglietti vengono idetificati tramite: Persona, Spettacolo, Numero posto \\
 		\hline 		
 	\end{tabular} 
 	\\\\\\
@@ -342,14 +343,19 @@
 			\item Capienza: \textit{int}
 			\item Grandezza\_schermo: \textit{int}
 		\end{itemize}
-		\item \textbf{Spettacolo}: Rappresenta dati per la Programmazione.
+		\item \textbf{Spettacolo}: Rappresenta dati per la programmazione degli spettacoli.
 		\begin{itemize}
+			\item Film: \textit{int}
+			\item Sala: \textit{int}
+			\item Cinema: \textit{string}
 			\item DataOra\_Inizio: \textit{timestamp}
 			\item 3D: \textit{bool}
 			\item Posti\_Venduti: \textit{int}
 		\end{itemize}
 		\item \textbf{Biglietto}: Rappresenta il biglietto venduto.
 		\begin{itemize}
+			\item Persona: \textit{int}
+			\item Spettacolo: \textit{int}
 			\item N\_Posto: \textit{int}
 		\end{itemize}
 		\item \textbf{Film}: Rappresenta un film.
@@ -366,6 +372,8 @@
 		\end{itemize}
 		\item \textbf{Lavoratore}: Rappresenta una persona partecipante nel cast.
 		\begin{itemize}
+			\item Persona: \textit{int}
+			\item Cast: \textit{int}
 			\item Salario: \textit{int}
 		\end{itemize}
 		\item \textbf{Attore}: Specializzazione di Lavoratore
@@ -393,6 +401,8 @@
 		\end{itemize}
 		\item \textbf{Recensione}: Rappresenta la recensione di un film da parte di una persona.
 		\begin{itemize}
+			\item Persona: \textit{int}
+			\item Film: \textit{int}
 			\item Commento: \textit{string}, possibilita' di null se la persona non rilascia un commento
 			\item Voto: \textit{int}
 		\end{itemize}
@@ -431,8 +441,8 @@
 		\item {\textbf{Cast-Lavoratore: \underline{Partecipa}}
 		    \begin{itemize}
 			    \item Ad un Cast partecipano diversi lavoratori
-			    \item Un lavoratore e' assegnato ad un cast con uno specifico ruolo
-			    \item Associazione di tipo (1,N) uno a molti
+			    \item Un lavoratore partecipa a diversi cast
+			    \item Associazione di tipo (N,M) molti a molti
 		    \end{itemize}}
 		  
 		\item {\textbf{Persona-Recensione: \underline{Rilascia}}
@@ -564,12 +574,20 @@
 	\subsubsection{Eliminazione generalizzioni}
 	\paragraph{Persona}
 	La generalizzaione \textit{Persona}, rappresenta una persona che e' un cliente del cinema, ha come figlia l'entita' \textit{Lavoratore}, che in questo caso viene considerato come il lavoratore che prende parte alla realizzazione di un film.\\
-	Essendo una generalizzazione parziale, si e' deciso di dividere le due entita' e creare una associazione tra le due. Questo perche' ci sono occorrenze che riferiscono singolarmente con l'entita' figlia Lavoratore.
+	Essendo una generalizzazione parziale, si e' deciso di dividere le due entita' e creare una associazione tra le due. Questo perche' ci sono entita' che riferiscono singolarmente con l'entita' figlia Lavoratore.
 	\paragraph{Lavoratore}
 	A sua volta la generalizzazione di \textit{Lavoratore} ha quattro entita' figlie: \textit{Attore}, \textit{Sceneggiatore}, \textit{Produttore} e \textit{Regista}.\\
 	Essendo in questo caso una generalizzazione completa, e non essendoci associazioni dirette con le entita' figlie, si e' deciso di accorpare le entita' figlie all'interno dell'entita' \textit{Lavoratore}, aggiungendone un nuovo attributo \textit{Ruolo}, il quale ha lo scopo di identificare i vari ruoli svolti dal lavoratore.
 	\subsubsection{Introduzione entita' indirizzo}
 	Per rappresentare le informazioni sull’indirizzo riguardanti la posizione di un \textit{Cinema}, è stata introdotta l’entità \textit{Indirizzo}. Questa entità contiene i seguenti attributi: cap, via, numero civico, nazione e città. \textit{Cinema} sara' l'unica entita' collegata ad \textit{Indirizzo}.
+	\subsubsection{Partizionamento/Accorpamento di entita' e relazioni}
+	Nel caso di \textbf{Lavoratore}, l'accorpamento della sua generalizzazione Attore/Sceneggiatore/Produttore/Regista crea ambiguita' in quanto un lavoratore puo' partecipare a diversi cast con diversi ruoli e salari. Oltre a questo, essendo la relazione Cast-Lavoratore una relazione n,m molti a molti, la sua traduzione in modello relazionale si compone in questo modo:\\
+	\begin{itemize}
+		\item \textbf{Lavoratore}: (Persona, Ruolo, Salario)
+		\item \textbf{Cast-Lavoratore}: (Persona, Ruolo, Cast)
+		\item \textbf{Cast}: (Id, Nome)
+	\end{itemize}
+	Di conseguenza si e' deciso di accorpare \textit{Cast-Lavoratore} in \textit{Lavoratore} aggiungendo l'attributo \textbf{Cast} di tipo \textbf{int} e rendendo la relazione \textit{Cast-Lavoratore} di tipo 1,N.
 	\subsubsection{Scelta degli identificatori primari}
 	\paragraph{Cinema}
 	Come scelta dell'identificatore primario nell'entita', viene scelto l'attributo \textit{Nome}, perche' il nome identifica un singolo cinema.
@@ -633,7 +651,6 @@
 	| .. |     .... |     ...   |                       ...|
 	+----+----------+-----------+--------------------------+	
 	\end{lstlisting}
-	\pagebreak
 	\paragraph{Query2}
 	Voto medio per film in base alle recensioni valide.
 	\begin{lstlisting}[language=SQL]
@@ -653,6 +670,7 @@
 	|                ...|        ... |
 	+-------------------+------------+	
 	\end{lstlisting}
+	\pagebreak
 	\paragraph{Query3}
 	Affluenza di persone per cinema.
 	\begin{lstlisting}[language=SQL]
@@ -689,8 +707,7 @@
 	+----+-----------+----------+-------+---------------+---------+
 	
 	\end{lstlisting}
-	\paragraph{Query5}
-	
+	\paragraph{Query5}	
 	Lista film a cui ha partecipato uno specifico attore. \\\textit{In questo caso viene preso come esempio la persona con Id=21.}
 	\begin{lstlisting}[language=SQL]
 	SELECT f.Titolo, f.Anno, f.Durata, f.Genere
